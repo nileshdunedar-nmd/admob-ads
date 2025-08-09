@@ -656,7 +656,7 @@
             <button class="back-btn" onclick="showPage('mainPage')">
                 <i class="fas fa-arrow-left"></i> मुख्य मेनू
             </button>
-            <h2 class="page-title">A Cabin रिपोर्ट</h2>
+            <h2 class="page-title">A Cabin Block Report</h2>
             
             <div class="section-title">
                 <i class="fas fa-layer-group"></i>
@@ -664,13 +664,13 @@
             </div>
             
             <div class="date-picker">
-                <input type="date" id="aCabinDate" max="">
-                <button class="today-btn" onclick="setToday('aCabinDate')">आज</button>
+                <input type="date" id="rriDate" max="">
+                <button class="today-btn" onclick="setToday('rriDate')">आज</button>
             </div>
             
             <div class="section-title">
                 <i class="fas fa-cogs"></i>
-                Equipment Status
+                Eng. Block
             </div>
             
             <div class="block-container">
@@ -678,19 +678,19 @@
                     <div class="block-header">DEMAND BLOCK</div>
                     <div class="input-row">
                         <label>UP:</label>
-                        <input type="number" min="0" value="0" onchange="updatePeriod(this, 'aDemandUpPeriod')">
+                        <input type="number" min="0" value="0" id="engDemandUp" onchange="updatePeriod(this, 'engDemandUpPeriod')">
                     </div>
                     <div class="input-row">
                         <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="aDemandUpPeriod">
+                        <input type="number" min="0" value="0" id="engDemandUpPeriod">
                     </div>
                     <div class="input-row">
                         <label>DN:</label>
-                        <input type="number" min="0" value="0" onchange="updatePeriod(this, 'aDemandDnPeriod')">
+                        <input type="number" min="0" value="0" id="engDemandDn" onchange="updatePeriod(this, 'engDemandDnPeriod')">
                     </div>
                     <div class="input-row">
                         <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="aDemandDnPeriod">
+                        <input type="number" min="0" value="0" id="engDemandDnPeriod">
                     </div>
                 </div>
                 
@@ -698,22 +698,117 @@
                     <div class="block-header">PERMITTED BLOCK</div>
                     <div class="input-row">
                         <label>UP:</label>
-                        <input type="number" min="0" value="0" onchange="updatePeriod(this, 'aPermittedUpPeriod')">
+                        <input type="number" min="0" value="0" id="engPermittedUp" onchange="updatePeriod(this, 'engPermittedUpPeriod')">
                     </div>
                     <div class="input-row">
                         <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="aPermittedUpPeriod">
+                        <input type="number" min="0" value="0" id="engPermittedUpPeriod">
                     </div>
                     <div class="input-row">
                         <label>DN:</label>
-                        <input type="number" min="0" value="0" onchange="updatePeriod(this, 'aPermittedDnPeriod')">
+                        <input type="number" min="0" value="0" id="engPermittedDn" onchange="updatePeriod(this, 'engPermittedDnPeriod')">
                     </div>
                     <div class="input-row">
                         <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="aPermittedDnPeriod">
+                        <input type="number" min="0" value="0" id="engPermittedDnPeriod">
                     </div>
                 </div>
             </div>
+            
+            <div class="section-title">
+                <i class="fas fa-bolt"></i>
+                OHE/TRD
+            </div>
+            
+            <div class="block-container">
+                <div class="block-card">
+                    <div class="block-header">DEMAND</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="oheDemandUp" onchange="updatePeriod(this, 'oheDemandUpPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>UP Period (min):</label>
+                        <input type="number" min="0" value="0" id="oheDemandUpPeriod">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="oheDemandDn" onchange="updatePeriod(this, 'oheDemandDnPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>DN Period (min):</label>
+                        <input type="number" min="0" value="0" id="oheDemandDnPeriod">
+                    </div>
+                </div>
+                
+                <div class="block-card">
+                    <div class="block-header">PERMIT</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="ohePermitUp" onchange="updatePeriod(this, 'ohePermitUpPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>UP Period (min):</label>
+                        <input type="number" min="0" value="0" id="ohePermitUpPeriod">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="ohePermitDn" onchange="updatePeriod(this, 'ohePermitDnPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>DN Period (min):</label>
+                        <input type="number" min="0" value="0" id="ohePermitDnPeriod">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="fas fa-tools"></i>
+                RCM/DCM
+            </div>
+            
+            <div class="block-container">
+                <div class="block-card">
+                    <div class="block-header">DEMAND</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="rcmDemandUp" onchange="updatePeriod(this, 'rcmDemandUpPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>UP Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmDemandUpPeriod">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="rcmDemandDn" onchange="updatePeriod(this, 'rcmDemandDnPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>DN Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmDemandDnPeriod">
+                    </div>
+                </div>
+                
+                <div class="block-card">
+                    <div class="block-header">PERMIT</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="rcmPermitUp" onchange="updatePeriod(this, 'rcmPermitUpPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>UP Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmPermitUpPeriod">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="rcmPermitDn" onchange="updatePeriod(this, 'rcmPermitDnPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>DN Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmPermitDnPeriod">
+                    </div>
+                </div>
+            </div>
+
             
             <button class="submit-btn" onclick="submitForm('A Cabin')">
                 <i class="fas fa-paper-plane"></i> सबमिट करें
@@ -733,21 +828,20 @@
             <button class="back-btn" onclick="showPage('mainPage')">
                 <i class="fas fa-arrow-left"></i> मुख्य मेनू
             </button>
-            <h2 class="page-title">B Cabin रिपोर्ट</h2>
-            
+            <h2 class="page-title">B Cabin Block Report</h2>
             <div class="section-title">
                 <i class="fas fa-layer-group"></i>
                 Block Position
             </div>
             
             <div class="date-picker">
-                <input type="date" id="bCabinDate" max="">
-                <button class="today-btn" onclick="setToday('bCabinDate')">आज</button>
+                <input type="date" id="rriDate" max="">
+                <button class="today-btn" onclick="setToday('rriDate')">आज</button>
             </div>
             
             <div class="section-title">
-                <i class="fas fa-bolt"></i>
-                Power Status
+                <i class="fas fa-cogs"></i>
+                Eng. Block
             </div>
             
             <div class="block-container">
@@ -755,19 +849,19 @@
                     <div class="block-header">DEMAND BLOCK</div>
                     <div class="input-row">
                         <label>UP:</label>
-                        <input type="number" min="0" value="0" onchange="updatePeriod(this, 'bDemandUpPeriod')">
+                        <input type="number" min="0" value="0" id="engDemandUp" onchange="updatePeriod(this, 'engDemandUpPeriod')">
                     </div>
                     <div class="input-row">
                         <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="bDemandUpPeriod">
+                        <input type="number" min="0" value="0" id="engDemandUpPeriod">
                     </div>
                     <div class="input-row">
                         <label>DN:</label>
-                        <input type="number" min="0" value="0" onchange="updatePeriod(this, 'bDemandDnPeriod')">
+                        <input type="number" min="0" value="0" id="engDemandDn" onchange="updatePeriod(this, 'engDemandDnPeriod')">
                     </div>
                     <div class="input-row">
                         <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="bDemandDnPeriod">
+                        <input type="number" min="0" value="0" id="engDemandDnPeriod">
                     </div>
                 </div>
                 
@@ -775,22 +869,117 @@
                     <div class="block-header">PERMITTED BLOCK</div>
                     <div class="input-row">
                         <label>UP:</label>
-                        <input type="number" min="0" value="0" onchange="updatePeriod(this, 'bPermittedUpPeriod')">
+                        <input type="number" min="0" value="0" id="engPermittedUp" onchange="updatePeriod(this, 'engPermittedUpPeriod')">
                     </div>
                     <div class="input-row">
                         <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="bPermittedUpPeriod">
+                        <input type="number" min="0" value="0" id="engPermittedUpPeriod">
                     </div>
                     <div class="input-row">
                         <label>DN:</label>
-                        <input type="number" min="0" value="0" onchange="updatePeriod(this, 'bPermittedDnPeriod')">
+                        <input type="number" min="0" value="0" id="engPermittedDn" onchange="updatePeriod(this, 'engPermittedDnPeriod')">
                     </div>
                     <div class="input-row">
                         <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="bPermittedDnPeriod">
+                        <input type="number" min="0" value="0" id="engPermittedDnPeriod">
                     </div>
                 </div>
             </div>
+            
+            <div class="section-title">
+                <i class="fas fa-bolt"></i>
+                OHE/TRD
+            </div>
+            
+            <div class="block-container">
+                <div class="block-card">
+                    <div class="block-header">DEMAND</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="oheDemandUp" onchange="updatePeriod(this, 'oheDemandUpPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>UP Period (min):</label>
+                        <input type="number" min="0" value="0" id="oheDemandUpPeriod">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="oheDemandDn" onchange="updatePeriod(this, 'oheDemandDnPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>DN Period (min):</label>
+                        <input type="number" min="0" value="0" id="oheDemandDnPeriod">
+                    </div>
+                </div>
+                
+                <div class="block-card">
+                    <div class="block-header">PERMIT</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="ohePermitUp" onchange="updatePeriod(this, 'ohePermitUpPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>UP Period (min):</label>
+                        <input type="number" min="0" value="0" id="ohePermitUpPeriod">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="ohePermitDn" onchange="updatePeriod(this, 'ohePermitDnPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>DN Period (min):</label>
+                        <input type="number" min="0" value="0" id="ohePermitDnPeriod">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="fas fa-tools"></i>
+                RCM/DCM
+            </div>
+            
+            <div class="block-container">
+                <div class="block-card">
+                    <div class="block-header">DEMAND</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="rcmDemandUp" onchange="updatePeriod(this, 'rcmDemandUpPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>UP Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmDemandUpPeriod">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="rcmDemandDn" onchange="updatePeriod(this, 'rcmDemandDnPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>DN Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmDemandDnPeriod">
+                    </div>
+                </div>
+                
+                <div class="block-card">
+                    <div class="block-header">PERMIT</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="rcmPermitUp" onchange="updatePeriod(this, 'rcmPermitUpPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>UP Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmPermitUpPeriod">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="rcmPermitDn" onchange="updatePeriod(this, 'rcmPermitDnPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>DN Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmPermitDnPeriod">
+                    </div>
+                </div>
+            </div>
+
             
             <button class="submit-btn" onclick="submitForm('B Cabin')">
                 <i class="fas fa-paper-plane"></i> सबमिट करें
@@ -810,21 +999,22 @@
             <button class="back-btn" onclick="showPage('mainPage')">
                 <i class="fas fa-arrow-left"></i> मुख्य मेनू
             </button>
-            <h2 class="page-title">C Cabin रिपोर्ट</h2>
+            <h2 class="page-title">C Cabin Block Report</h2>
             
+            <div class="section-title">
             <div class="section-title">
                 <i class="fas fa-layer-group"></i>
                 Block Position
             </div>
             
             <div class="date-picker">
-                <input type="date" id="cCabinDate" max="">
-                <button class="today-btn" onclick="setToday('cCabinDate')">आज</button>
+                <input type="date" id="rriDate" max="">
+                <button class="today-btn" onclick="setToday('rriDate')">आज</button>
             </div>
             
             <div class="section-title">
-                <i class="fas fa-signal"></i>
-                Signal Status
+                <i class="fas fa-cogs"></i>
+                Eng. Block
             </div>
             
             <div class="block-container">
@@ -832,19 +1022,19 @@
                     <div class="block-header">DEMAND BLOCK</div>
                     <div class="input-row">
                         <label>UP:</label>
-                        <input type="number" min="0" value="0" onchange="updatePeriod(this, 'cDemandUpPeriod')">
+                        <input type="number" min="0" value="0" id="engDemandUp" onchange="updatePeriod(this, 'engDemandUpPeriod')">
                     </div>
                     <div class="input-row">
                         <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="cDemandUpPeriod">
+                        <input type="number" min="0" value="0" id="engDemandUpPeriod">
                     </div>
                     <div class="input-row">
                         <label>DN:</label>
-                        <input type="number" min="0" value="0" onchange="updatePeriod(this, 'cDemandDnPeriod')">
+                        <input type="number" min="0" value="0" id="engDemandDn" onchange="updatePeriod(this, 'engDemandDnPeriod')">
                     </div>
                     <div class="input-row">
                         <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="cDemandDnPeriod">
+                        <input type="number" min="0" value="0" id="engDemandDnPeriod">
                     </div>
                 </div>
                 
@@ -852,22 +1042,117 @@
                     <div class="block-header">PERMITTED BLOCK</div>
                     <div class="input-row">
                         <label>UP:</label>
-                        <input type="number" min="0" value="0" onchange="updatePeriod(this, 'cPermittedUpPeriod')">
+                        <input type="number" min="0" value="0" id="engPermittedUp" onchange="updatePeriod(this, 'engPermittedUpPeriod')">
                     </div>
                     <div class="input-row">
                         <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="cPermittedUpPeriod">
+                        <input type="number" min="0" value="0" id="engPermittedUpPeriod">
                     </div>
                     <div class="input-row">
                         <label>DN:</label>
-                        <input type="number" min="0" value="0" onchange="updatePeriod(this, 'cPermittedDnPeriod')">
+                        <input type="number" min="0" value="0" id="engPermittedDn" onchange="updatePeriod(this, 'engPermittedDnPeriod')">
                     </div>
                     <div class="input-row">
                         <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="cPermittedDnPeriod">
+                        <input type="number" min="0" value="0" id="engPermittedDnPeriod">
                     </div>
                 </div>
             </div>
+            
+            <div class="section-title">
+                <i class="fas fa-bolt"></i>
+                OHE/TRD
+            </div>
+            
+            <div class="block-container">
+                <div class="block-card">
+                    <div class="block-header">DEMAND</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="oheDemandUp" onchange="updatePeriod(this, 'oheDemandUpPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>UP Period (min):</label>
+                        <input type="number" min="0" value="0" id="oheDemandUpPeriod">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="oheDemandDn" onchange="updatePeriod(this, 'oheDemandDnPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>DN Period (min):</label>
+                        <input type="number" min="0" value="0" id="oheDemandDnPeriod">
+                    </div>
+                </div>
+                
+                <div class="block-card">
+                    <div class="block-header">PERMIT</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="ohePermitUp" onchange="updatePeriod(this, 'ohePermitUpPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>UP Period (min):</label>
+                        <input type="number" min="0" value="0" id="ohePermitUpPeriod">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="ohePermitDn" onchange="updatePeriod(this, 'ohePermitDnPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>DN Period (min):</label>
+                        <input type="number" min="0" value="0" id="ohePermitDnPeriod">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="fas fa-tools"></i>
+                RCM/DCM
+            </div>
+            
+            <div class="block-container">
+                <div class="block-card">
+                    <div class="block-header">DEMAND</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="rcmDemandUp" onchange="updatePeriod(this, 'rcmDemandUpPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>UP Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmDemandUpPeriod">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="rcmDemandDn" onchange="updatePeriod(this, 'rcmDemandDnPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>DN Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmDemandDnPeriod">
+                    </div>
+                </div>
+                
+                <div class="block-card">
+                    <div class="block-header">PERMIT</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="rcmPermitUp" onchange="updatePeriod(this, 'rcmPermitUpPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>UP Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmPermitUpPeriod">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="rcmPermitDn" onchange="updatePeriod(this, 'rcmPermitDnPeriod')">
+                    </div>
+                    <div class="input-row">
+                        <label>DN Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmPermitDnPeriod">
+                    </div>
+                </div>
+            </div>
+
             
             <button class="submit-btn" onclick="submitForm('C Cabin')">
                 <i class="fas fa-paper-plane"></i> सबमिट करें
