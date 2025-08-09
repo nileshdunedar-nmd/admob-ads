@@ -1,17 +1,814 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4018280178767791"></script>
+    <title>Railway Maintenance App</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #333;
+            min-height: 100vh;
+            padding-bottom: 70px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: #0d47a1;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            margin-bottom: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+        }
+        
+        .page {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+            min-height: 500px;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .nav-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            z-index: 100;
+        }
+        
+        .nav-btn {
+            background: #0d47a1;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 5px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .nav-btn i {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .nav-btn.active {
+            background: #ff9800;
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .nav-btn:hover {
+            background: #1565c0;
+        }
+        
+        /* Ad Containers */
+        .ad-container {
+            height: 90px;
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin: 15px 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .ad-label {
+            font-size: 0.8rem;
+            color: #777;
+            text-align: center;
+            padding: 5px;
+        }
+        
+        .interstitial-ad {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+        
+        .interstitial-ad .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #f44336;
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f5f5f5;
+            border-radius: 10px;
+        }
+        
+        .form-group h3 {
+            background: #0d47a1;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin: -15px -15px 15px -15px;
+        }
+        
+        .demand-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .demand-row label {
+            width: 100px;
+            font-weight: bold;
+        }
+        
+        .demand-row input, .demand-row select {
+            flex: 1;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .checkbox-group input {
+            margin-right: 10px;
+        }
+        
+        .submit-btn {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+            width: 80%;
+            transition: all 0.3s;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .submit-btn:hover {
+            background: #388E3C;
+            transform: translateY(-3px);
+        }
+        
+        /* Dashboard Styles */
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #0d47a1, #1976d2);
+            color: white;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-card i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card h3 {
+            font-size: 1.5rem;
+            margin: 5px 0;
+        }
+        
+        .recent-reports {
+            background: white;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .recent-reports h3 {
+            color: #0d47a1;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .report-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .report-item:last-child {
+            border-bottom: none;
+        }
+        
+        /* Settings Page */
+        .settings-card {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .settings-card h3 {
+            color: #0d47a1;
+            margin-bottom: 15px;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+        
+        .toggle-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        /* Help Page */
+        .help-section {
+            margin-bottom: 25px;
+        }
+        
+        .help-section h3 {
+            color: #0d47a1;
+            margin-bottom: 10px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .help-step {
+            display: flex;
+            margin-bottom: 15px;
+            align-items: flex-start;
+        }
+        
+        .step-number {
+            background: #0d47a1;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        /* Ad simulation */
+        .ad-simulation {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #ff5722, #ff9800);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+        }
+        
+        .ad-logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .ad-text {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+        
+        .ad-cta {
+            background: white;
+            color: #ff5722;
+            padding: 8px 20px;
+            border-radius: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        
+        /* Responsive design */
+        @media (max-width: 600px) {
+            .dashboard-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-btn {
+                font-size: 0.7rem;
+                padding: 10px 3px;
+            }
+            
+            .nav-btn i {
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <!-- Banner Ad -->
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:320px;height:50px"
-         data-ad-client="ca-pub-4018280178767791"
-         data-ad-slot="ca-app-pub-4018280178767791/1788604329"></ins>
+    <!-- Interstitial Ad (shown on app open) -->
+    <div class="interstitial-ad" id="interstitialAd">
+        <button class="close-btn" id="closeAd">&times;</button>
+        <div class="ad-simulation">
+            <div class="ad-logo">ADMOB</div>
+            <div class="ad-text">INTERSTITIAL AD</div>
+            <div class="ad-text">Special Offer for App Developers</div>
+            <div class="ad-cta">LEARN MORE</div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1 id="pageTitle">Railway Maintenance App</h1>
+            <p id="pageSubtitle">Efficient Reporting System</p>
+        </header>
+        
+        <!-- Main Dashboard Page -->
+        <div id="dashboardPage" class="page active">
+            <div class="dashboard-stats">
+                <div class="stat-card">
+                    <i class="fas fa-clipboard-list"></i>
+                    <h3>42</h3>
+                    <p>Reports Submitted</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>38</h3>
+                    <p>Issues Resolved</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-tools"></i>
+                    <h3>12</h3>
+                    <p>Pending Actions</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>8</h3>
+                    <p>Active Users</p>
+                </div>
+            </div>
+            
+            <div class="ad-label">Banner Ad</div>
+            <div class="ad-container">
+                <div class="ad-simulation">
+                    <div class="ad-logo">ADMOB</div>
+                    <div class="ad-text">BANNER AD</div>
+                </div>
+            </div>
+            
+            <div class="recent-reports">
+                <h3>Recent Reports</h3>
+                <div class="report-item">
+                    <div>
+                        <strong>Eng. Block</strong>
+                        <div>10 Aug 2023</div>
+                    </div>
+                    <div>Completed</div>
+                </div>
+                <div class="report-item">
+                    <div>
+                        <strong>OHE/TRD</strong>
+                        <div>9 Aug 2023</div>
+                    </div>
+                    <div>Pending</div>
+                </div>
+                <div class="report-item">
+                    <div>
+                        <strong>REM/DCM</strong>
+                        <div>8 Aug 2023</div>
+                    </div>
+                    <div>Completed</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Report Form Page -->
+        <div id="reportPage" class="page">
+            <h2 style="text-align: center; color: #0d47a1; margin-bottom: 20px;">Maintenance Report</h2>
+            
+            <div class="form-group">
+                <h3>Select Date</h3>
+                <input type="date" id="reportDate" class="demand-row" style="width: 100%; padding: 10px; margin-top: 10px;">
+            </div>
+            
+            <div class="form-group">
+                <h3>Eng. Block</h3>
+                <div class="demand-row">
+                    <label>DEMAND</label>
+                    <div style="flex: 1; display: flex; gap: 15px;">
+                        <label><input type="checkbox" name="eng-demand" value="up"> UP</label>
+                        <label><input type="checkbox" name="eng-demand" value="dn"> DN</label>
+                    </div>
+                </div>
+                <div class="demand-row">
+                    <label>Time:</label>
+                    <input type="time">
+                </div>
+                <div class="demand-row">
+                    <label>No.:</label>
+                    <input type="text">
+                </div>
+                <div class="demand-row">
+                    <label>Time:</label>
+                    <input type="time">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h3>OHE/TRD</h3>
+                <div class="demand-row">
+                    <label>DEMAND</label>
+                    <div style="flex: 1; display: flex; gap: 15px;">
+                        <label><input type="checkbox" name="ohe-demand" value="up"> UP</label>
+                        <label><input type="checkbox" name="ohe-demand" value="dn"> DN</label>
+                    </div>
+                </div>
+                <div class="demand-row">
+                    <label>Time:</label>
+                    <input type="time">
+                </div>
+                <div class="demand-row">
+                    <label>No.:</label>
+                    <input type="text">
+                </div>
+                <div class="demand-row">
+                    <label>Time:</label>
+                    <input type="time">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <h3>REM/DCM</h3>
+                <div class="demand-row">
+                    <label>DEMAND</label>
+                    <div style="flex: 1; display: flex; gap: 15px;">
+                        <label><input type="checkbox" name="rem-demand" value="up"> UP</label>
+                        <label><input type="checkbox" name="rem-demand" value="dn"> DN</label>
+                    </div>
+                </div>
+                <div class="demand-row">
+                    <label>Time:</label>
+                    <input type="time">
+                </div>
+                <div class="demand-row">
+                    <label>No.:</label>
+                    <input type="text">
+                </div>
+                <div class="demand-row">
+                    <label>Time:</label>
+                    <input type="time">
+                </div>
+            </div>
+            
+            <div class="ad-label">Banner Ad</div>
+            <div class="ad-container">
+                <div class="ad-simulation">
+                    <div class="ad-logo">ADMOB</div>
+                    <div class="ad-text">BANNER AD</div>
+                </div>
+            </div>
+            
+            <button class="submit-btn" onclick="submitReport()">
+                <i class="fas fa-paper-plane"></i> SUBMIT REPORT
+            </button>
+        </div>
+        
+        <!-- History Page -->
+        <div id="historyPage" class="page">
+            <h2 style="text-align: center; color: #0d47a1; margin-bottom: 20px;">Report History</h2>
+            
+            <div style="margin-bottom: 20px; text-align: center;">
+                <div style="display: inline-block; position: relative;">
+                    <input type="text" placeholder="Search reports..." style="padding: 10px 15px; width: 250px; border-radius: 50px; border: 1px solid #ddd; padding-left: 40px;">
+                    <i class="fas fa-search" style="position: absolute; left: 15px; top: 12px; color: #777;"></i>
+                </div>
+            </div>
+            
+            <div class="recent-reports">
+                <div class="report-item">
+                    <div>
+                        <strong>Eng. Block</strong>
+                        <div>12 Aug 2023, 14:30</div>
+                    </div>
+                    <div><i class="fas fa-check-circle" style="color: #4CAF50;"></i></div>
+                </div>
+                <div class="report-item">
+                    <div>
+                        <strong>OHE/TRD</strong>
+                        <div>11 Aug 2023, 10:15</div>
+                    </div>
+                    <div><i class="fas fa-check-circle" style="color: #4CAF50;"></i></div>
+                </div>
+                <div class="report-item">
+                    <div>
+                        <strong>REM/DCM</strong>
+                        <div>10 Aug 2023, 16:45</div>
+                    </div>
+                    <div><i class="fas fa-hourglass-half" style="color: #FF9800;"></i></div>
+                </div>
+                <div class="report-item">
+                    <div>
+                        <strong>Eng. Block</strong>
+                        <div>9 Aug 2023, 09:20</div>
+                    </div>
+                    <div><i class="fas fa-check-circle" style="color: #4CAF50;"></i></div>
+                </div>
+                <div class="report-item">
+                    <div>
+                        <strong>OHE/TRD</strong>
+                        <div>8 Aug 2023, 13:10</div>
+                    </div>
+                    <div><i class="fas fa-times-circle" style="color: #f44336;"></i></div>
+                </div>
+            </div>
+            
+            <div class="ad-label">Banner Ad</div>
+            <div class="ad-container">
+                <div class="ad-simulation">
+                    <div class="ad-logo">ADMOB</div>
+                    <div class="ad-text">BANNER AD</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Settings Page -->
+        <div id="settingsPage" class="page">
+            <h2 style="text-align: center; color: #0d47a1; margin-bottom: 20px;">App Settings</h2>
+            
+            <div class="settings-card">
+                <h3>Notification Settings</h3>
+                <div class="toggle-group">
+                    <span>Report Reminders</span>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="toggle-group">
+                    <span>Update Notifications</span>
+                    <label class="switch">
+                        <input type="checkbox" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+            </div>
+            
+            <div class="settings-card">
+                <h3>Google Sheets Integration</h3>
+                <p style="margin-bottom: 15px;">Connected to Google Sheet: <strong>Railway_Reports</strong></p>
+                <button style="background: #0d47a1; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
+                    <i class="fas fa-sync-alt"></i> Sync Now
+                </button>
+            </div>
+            
+            <div class="ad-label">Banner Ad</div>
+            <div class="ad-container">
+                <div class="ad-simulation">
+                    <div class="ad-logo">ADMOB</div>
+                    <div class="ad-text">BANNER AD</div>
+                </div>
+            </div>
+            
+            <div class="settings-card">
+                <h3>App Information</h3>
+                <p><strong>Version:</strong> 1.2.0</p>
+                <p><strong>Last Updated:</strong> August 10, 2023</p>
+                <p><strong>Support:</strong> support@railapp.com</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation Buttons -->
+    <div class="nav-buttons">
+        <button class="nav-btn active" data-page="dashboardPage">
+            <i class="fas fa-home"></i> Dashboard
+        </button>
+        <button class="nav-btn" data-page="reportPage">
+            <i class="fas fa-file-alt"></i> Report
+        </button>
+        <button class="nav-btn" data-page="historyPage">
+            <i class="fas fa-history"></i> History
+        </button>
+        <button class="nav-btn" data-page="settingsPage">
+            <i class="fas fa-cog"></i> Settings
+        </button>
+    </div>
+
     <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
+        // Show interstitial ad on app open
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('interstitialAd').style.display = 'flex';
+        });
+        
+        // Close ad button
+        document.getElementById('closeAd').addEventListener('click', function() {
+            document.getElementById('interstitialAd').style.display = 'none';
+        });
+        
+        // Navigation functionality
+        const navButtons = document.querySelectorAll('.nav-btn');
+        const pages = document.querySelectorAll('.page');
+        
+        navButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const targetPage = this.getAttribute('data-page');
+                
+                // Update active button
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Update active page
+                pages.forEach(page => page.classList.remove('active'));
+                document.getElementById(targetPage).classList.add('active');
+                
+                // Update page title
+                const pageTitle = document.getElementById('pageTitle');
+                const pageSubtitle = document.getElementById('pageSubtitle');
+                
+                switch(targetPage) {
+                    case 'dashboardPage':
+                        pageTitle.textContent = 'Railway Maintenance App';
+                        pageSubtitle.textContent = 'Efficient Reporting System';
+                        break;
+                    case 'reportPage':
+                        pageTitle.textContent = 'New Maintenance Report';
+                        pageSubtitle.textContent = 'Fill out the form below';
+                        break;
+                    case 'historyPage':
+                        pageTitle.textContent = 'Report History';
+                        pageSubtitle.textContent = 'View past submissions';
+                        break;
+                    case 'settingsPage':
+                        pageTitle.textContent = 'App Settings';
+                        pageSubtitle.textContent = 'Customize your experience';
+                        break;
+                }
+            });
+        });
+        
+        // Form submission function
+        function submitReport() {
+            const date = document.getElementById('reportDate').value;
+            
+            if (!date) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Missing Date',
+                    text: 'Please select a date for your report',
+                });
+                return;
+            }
+            
+            Swal.fire({
+                title: 'Submitting Report...',
+                timer: 2000,
+                timerProgressBar: true,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            }).then(() => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Report Submitted!',
+                    text: 'Your maintenance report has been saved to Google Sheets',
+                });
+                
+                // Simulate Google Sheets save
+                console.log('Report saved to Google Sheets:', {
+                    date: date,
+                    timestamp: new Date().toISOString(),
+                    engBlock: getFormData('eng-demand'),
+                    oheTrd: getFormData('ohe-demand'),
+                    remDcm: getFormData('rem-demand')
+                });
+            });
+        }
+        
+        // Helper function to get form data
+        function getFormData(name) {
+            const checkboxes = document.querySelectorAll(`input[name="${name}"]:checked`);
+            return Array.from(checkboxes).map(cb => cb.value);
+        }
+        
+        // Set today's date as default
+        document.getElementById('reportDate').valueAsDate = new Date();
     </script>
 </body>
 </html>
