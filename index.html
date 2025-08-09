@@ -172,78 +172,80 @@
             border-radius: 2px;
         }
         
-        .report-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        
-        .report-table th {
-            background-color: var(--primary);
+        .section-title {
+            background: var(--primary);
             color: white;
-            padding: 12px 8px;
-            text-align: center;
-            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 5px;
+            margin: 20px 0 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        .report-table td {
-            padding: 10px 8px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
+        .section-title i {
+            color: var(--secondary);
         }
         
-        .report-table tr:nth-child(even) {
-            background-color: #f9f9f9;
+        .form-group {
+            margin-bottom: 25px;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
         }
         
-        .report-table tr:hover {
-            background-color: #f1f1f1;
+        .block-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
         }
         
-        .report-table input {
-            width: 80px;
-            padding: 8px;
+        .block-card {
+            background: white;
             border: 1px solid #ddd;
-            border-radius: 4px;
-            text-align: center;
-            font-weight: bold;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
         }
         
-        .date-row {
-            background-color: #e6f7ff;
+        .block-header {
+            background: #e6f7ff;
+            padding: 8px;
+            border-radius: 5px;
+            text-align: center;
             font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary);
         }
         
         .input-row {
             display: flex;
             align-items: center;
             margin-bottom: 12px;
-            flex-wrap: wrap;
             gap: 10px;
-            justify-content: center;
         }
         
         .input-row label {
-            min-width: 120px;
+            min-width: 80px;
             font-weight: bold;
             color: var(--dark);
         }
         
         .input-row input {
+            flex: 1;
             padding: 10px;
             border: 1px solid #ddd;
             border-radius: 8px;
-            min-width: 150px;
             background: white;
             font-size: 1rem;
             text-align: center;
+            font-weight: bold;
         }
         
         input[type="number"] {
-            font-weight: bold;
+            min-width: 80px;
         }
         
         .submit-btn {
@@ -367,33 +369,24 @@
             transform: scale(1.05);
         }
         
-        .sheet-info {
-            background: #e6f7ff;
-            border-radius: 10px;
-            padding: 15px;
-            margin: 20px 0;
-            text-align: center;
-            border-left: 4px solid var(--primary);
+        .date-picker {
+            display: flex;
+            justify-content: center;
+            margin: 15px 0;
         }
         
-        .sheet-info i {
-            color: var(--accent);
-            margin-right: 8px;
+        .date-picker input {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: bold;
+            text-align: center;
         }
         
         @media (max-width: 768px) {
-            .report-table {
-                font-size: 0.85rem;
-            }
-            
-            .report-table th,
-            .report-table td {
-                padding: 8px 4px;
-            }
-            
-            .report-table input {
-                width: 60px;
-                padding: 5px;
+            .block-container {
+                grid-template-columns: 1fr;
             }
             
             .main-menu {
@@ -448,11 +441,6 @@
                 </button>
             </div>
             
-            <div class="sheet-info">
-                <i class="fas fa-info-circle"></i> 
-                सभी डेटा Google शीट में सेव होगा: RRI, A Cabin, B Cabin, C Cabin
-            </div>
-            
             <div class="ad-label">बैनर विज्ञापन</div>
             <div class="ad-container">
                 <div style="text-align: center;">
@@ -467,40 +455,136 @@
             <button class="back-btn" onclick="showPage('mainPage')">
                 <i class="fas fa-arrow-left"></i> मुख्य मेनू
             </button>
-            <h2 class="page-title">RRI Block रिपोर्ट</h2>
+            <h2 class="page-title">AjNI RRI</h2>
             
-            <div class="input-row">
-                <label>तारीख चुनें:</label>
+            <div class="section-title">
+                <i class="fas fa-layer-group"></i>
+                Block Position
+            </div>
+            
+            <div class="date-picker">
                 <input type="date" id="rriDate">
             </div>
             
-            <table class="report-table">
-                <thead>
-                    <tr>
-                        <th rowspan="2">तारीख</th>
-                        <th colspan="2">मांगे गए ब्लॉक</th>
-                        <th colspan="2">स्वीकृत ब्लॉक</th>
-                    </tr>
-                    <tr>
-                        <th>ऊपर</th>
-                        <th>नीचे</th>
-                        <th>ऊपर</th>
-                        <th>नीचे</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="date-row" id="rriDateDisplay">01/08/2025</td>
-                        <td><input type="number" id="demandUp" min="0" value="0"></td>
-                        <td><input type="number" id="demandDown" min="0" value="0"></td>
-                        <td><input type="number" id="grantedUp" min="0" value="0"></td>
-                        <td><input type="number" id="grantedDown" min="0" value="0"></td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="section-title">
+                <i class="fas fa-cogs"></i>
+                Eng. Block
+            </div>
+            
+            <div class="block-container">
+                <div class="block-card">
+                    <div class="block-header">DEMAND BLOCK</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="engDemandUp">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="engDemandDn">
+                    </div>
+                    <div class="input-row">
+                        <label>Period (min):</label>
+                        <input type="number" min="0" value="0" id="engDemandPeriod">
+                    </div>
+                </div>
+                
+                <div class="block-card">
+                    <div class="block-header">PERMITTED BLOCK</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="engPermittedUp">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="engPermittedDn">
+                    </div>
+                    <div class="input-row">
+                        <label>Period (min):</label>
+                        <input type="number" min="0" value="0" id="engPermittedPeriod">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="fas fa-bolt"></i>
+                OHE/TRD
+            </div>
+            
+            <div class="block-container">
+                <div class="block-card">
+                    <div class="block-header">DEMAND</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="oheDemandUp">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="oheDemandDn">
+                    </div>
+                    <div class="input-row">
+                        <label>Period (min):</label>
+                        <input type="number" min="0" value="0" id="oheDemandPeriod">
+                    </div>
+                </div>
+                
+                <div class="block-card">
+                    <div class="block-header">PERMIT</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="ohePermitUp">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="ohePermitDn">
+                    </div>
+                    <div class="input-row">
+                        <label>Period (min):</label>
+                        <input type="number" min="0" value="0" id="ohePermitPeriod">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section-title">
+                <i class="fas fa-tools"></i>
+                RCM/DCM
+            </div>
+            
+            <div class="block-container">
+                <div class="block-card">
+                    <div class="block-header">DEMAND</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="rcmDemandUp">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="rcmDemandDn">
+                    </div>
+                    <div class="input-row">
+                        <label>Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmDemandPeriod">
+                    </div>
+                </div>
+                
+                <div class="block-card">
+                    <div class="block-header">PERMIT</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0" id="rcmPermitUp">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0" id="rcmPermitDn">
+                    </div>
+                    <div class="input-row">
+                        <label>Period (min):</label>
+                        <input type="number" min="0" value="0" id="rcmPermitPeriod">
+                    </div>
+                </div>
+            </div>
             
             <button class="submit-btn" onclick="submitForm('RRI')">
-                <i class="fas fa-paper-plane"></i> RRI शीट में सेव करें
+                <i class="fas fa-paper-plane"></i> सबमिट करें
             </button>
             
             <div class="ad-label">बैनर विज्ञापन</div>
@@ -519,276 +603,30 @@
             </button>
             <h2 class="page-title">A Cabin रिपोर्ट</h2>
             
-            <div class="input-row">
-                <label>तारीख चुनें:</label>
+            <div class="section-title">
+                <i class="fas fa-layer-group"></i>
+                Block Position
+            </div>
+            
+            <div class="date-picker">
                 <input type="date" id="aCabinDate">
             </div>
             
-            <table class="report-table">
-                <thead>
-                    <tr>
-                        <th rowspan="2">तारीख</th>
-                        <th colspan="2">मांगे गए ब्लॉक</th>
-                        <th colspan="2">स्वीकृत ब्लॉक</th>
-                    </tr>
-                    <tr>
-                        <th>ऊपर</th>
-                        <th>नीचे</th>
-                        <th>ऊपर</th>
-                        <th>नीचे</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="date-row" id="aCabinDateDisplay">01/08/2025</td>
-                        <td><input type="number" id="aDemandUp" min="0" value="0"></td>
-                        <td><input type="number" id="aDemandDown" min="0" value="0"></td>
-                        <td><input type="number" id="aGrantedUp" min="0" value="0"></td>
-                        <td><input type="number" id="aGrantedDown" min="0" value="0"></td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <button class="submit-btn" onclick="submitForm('A Cabin')">
-                <i class="fas fa-paper-plane"></i> A Cabin शीट में सेव करें
-            </button>
-            
-            <div class="ad-label">बैनर विज्ञापन</div>
-            <div class="ad-container">
-                <div style="text-align: center;">
-                    <i class="fas fa-ad" style="font-size: 2rem; color: #6c757d;"></i>
-                    <div style="font-weight: bold; margin-top: 5px;">AdMob बैनर</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- B Cabin पेज -->
-        <div id="bCabinPage" class="page">
-            <button class="back-btn" onclick="showPage('mainPage')">
-                <i class="fas fa-arrow-left"></i> मुख्य मेनू
-            </button>
-            <h2 class="page-title">B Cabin रिपोर्ट</h2>
-            
-            <div class="input-row">
-                <label>तारीख चुनें:</label>
-                <input type="date" id="bCabinDate">
+            <div class="section-title">
+                <i class="fas fa-cogs"></i>
+                Equipment Status
             </div>
             
-            <table class="report-table">
-                <thead>
-                    <tr>
-                        <th rowspan="2">तारीख</th>
-                        <th colspan="2">मांगे गए ब्लॉक</th>
-                        <th colspan="2">स्वीकृत ब्लॉक</th>
-                    </tr>
-                    <tr>
-                        <th>ऊपर</th>
-                        <th>नीचे</th>
-                        <th>ऊपर</th>
-                        <th>नीचे</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="date-row" id="bCabinDateDisplay">01/08/2025</td>
-                        <td><input type="number" id="bDemandUp" min="0" value="0"></td>
-                        <td><input type="number" id="bDemandDown" min="0" value="0"></td>
-                        <td><input type="number" id="bGrantedUp" min="0" value="0"></td>
-                        <td><input type="number" id="bGrantedDown" min="0" value="0"></td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <button class="submit-btn" onclick="submitForm('B Cabin')">
-                <i class="fas fa-paper-plane"></i> B Cabin शीट में सेव करें
-            </button>
-            
-            <div class="ad-label">बैनर विज्ञापन</div>
-            <div class="ad-container">
-                <div style="text-align: center;">
-                    <i class="fas fa-ad" style="font-size: 2rem; color: #6c757d;"></i>
-                    <div style="font-weight: bold; margin-top: 5px;">AdMob बैनर</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- C Cabin पेज -->
-        <div id="cCabinPage" class="page">
-            <button class="back-btn" onclick="showPage('mainPage')">
-                <i class="fas fa-arrow-left"></i> मुख्य मेनू
-            </button>
-            <h2 class="page-title">C Cabin रिपोर्ट</h2>
-            
-            <div class="input-row">
-                <label>तारीख चुनें:</label>
-                <input type="date" id="cCabinDate">
-            </div>
-            
-            <table class="report-table">
-                <thead>
-                    <tr>
-                        <th rowspan="2">तारीख</th>
-                        <th colspan="2">मांगे गए ब्लॉक</th>
-                        <th colspan="2">स्वीकृत ब्लॉक</th>
-                    </tr>
-                    <tr>
-                        <th>ऊपर</th>
-                        <th>नीचे</th>
-                        <th>ऊपर</th>
-                        <th>नीचे</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="date-row" id="cCabinDateDisplay">01/08/2025</td>
-                        <td><input type="number" id="cDemandUp" min="0" value="0"></td>
-                        <td><input type="number" id="cDemandDown" min="0" value="0"></td>
-                        <td><input type="number" id="cGrantedUp" min="0" value="0"></td>
-                        <td><input type="number" id="cGrantedDown" min="0" value="0"></td>
-                    </tr>
-                </tbody>
-            </table>
-            
-            <button class="submit-btn" onclick="submitForm('C Cabin')">
-                <i class="fas fa-paper-plane"></i> C Cabin शीट में सेव करें
-            </button>
-            
-            <div class="ad-label">बैनर विज्ञापन</div>
-            <div class="ad-container">
-                <div style="text-align: center;">
-                    <i class="fas fa-ad" style="font-size: 2rem; color: #6c757d;"></i>
-                    <div style="font-weight: bold; margin-top: 5px;">AdMob बैनर</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // ऐप लोड होते ही इंटरस्टीशियल एड दिखाएं
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('interstitialAd').style.display = 'flex';
-            setCurrentDate();
-        });
-        
-        // एड क्लोज करने के लिए
-        document.getElementById('closeAd').addEventListener('click', function() {
-            document.getElementById('interstitialAd').style.display = 'none';
-        });
-        
-        document.getElementById('continueBtn').addEventListener('click', function() {
-            document.getElementById('interstitialAd').style.display = 'none';
-        });
-        
-        // पेज बदलने का फंक्शन
-        function showPage(pageId) {
-            // सभी पेज छुपाएं
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // चुना हुआ पेज दिखाएं
-            document.getElementById(pageId).classList.add('active');
-            
-            // डेट अपडेट करें
-            setCurrentDate();
-        }
-        
-        // वर्तमान डेट सेट करें
-        function setCurrentDate() {
-            const today = new Date();
-            const formattedDate = formatDate(today);
-            
-            // सभी डेट इनपुट्स सेट करें
-            const dateInputs = document.querySelectorAll('input[type="date"]');
-            dateInputs.forEach(input => {
-                input.value = today.toISOString().split('T')[0];
-            });
-            
-            // सभी डेट डिस्प्ले अपडेट करें
-            const dateDisplays = document.querySelectorAll('.date-row');
-            dateDisplays.forEach(display => {
-                display.textContent = formattedDate;
-            });
-        }
-        
-        // डेट फॉर्मेट करने का फंक्शन (dd/mm/yyyy)
-        function formatDate(date) {
-            const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const year = date.getFullYear();
-            return `${day}/${month}/${year}`;
-        }
-        
-        // फॉर्म सबमिशन फंक्शन
-        function submitForm(sheetName) {
-            // डेटा एकत्रित करें
-            const date = document.querySelector('.date-row').textContent;
-            let demandUp, demandDown, grantedUp, grantedDown;
-            
-            if (sheetName === 'RRI') {
-                demandUp = document.getElementById('demandUp').value;
-                demandDown = document.getElementById('demandDown').value;
-                grantedUp = document.getElementById('grantedUp').value;
-                grantedDown = document.getElementById('grantedDown').value;
-            } else if (sheetName === 'A Cabin') {
-                demandUp = document.getElementById('aDemandUp').value;
-                demandDown = document.getElementById('aDemandDown').value;
-                grantedUp = document.getElementById('aGrantedUp').value;
-                grantedDown = document.getElementById('aGrantedDown').value;
-            } else if (sheetName === 'B Cabin') {
-                demandUp = document.getElementById('bDemandUp').value;
-                demandDown = document.getElementById('bDemandDown').value;
-                grantedUp = document.getElementById('bGrantedUp').value;
-                grantedDown = document.getElementById('bGrantedDown').value;
-            } else if (sheetName === 'C Cabin') {
-                demandUp = document.getElementById('cDemandUp').value;
-                demandDown = document.getElementById('cDemandDown').value;
-                grantedUp = document.getElementById('cGrantedUp').value;
-                grantedDown = document.getElementById('cGrantedDown').value;
-            }
-            
-            // Google शीट में सेव करने का सिमुलेशन
-            Swal.fire({
-                title: 'डेटा सेव हो रहा है',
-                html: `<b>${sheetName}</b> शीट में डेटा सेव किया जा रहा है...`,
-                timer: 2000,
-                timerProgressBar: true,
-                didOpen: () => {
-                    Swal.showLoading();
-                }
-            }).then(() => {
-                Swal.fire({
-                    icon: 'success',
-                    title: 'डेटा सेव हो गया!',
-                    html: `आपका डेटा <b>${sheetName}</b> शीट में सफलतापूर्वक सेव हो गया है।`,
-                    confirmButtonText: 'ठीक है'
-                });
-            });
-            
-            // मुख्य मेनू पर वापस जाएं
-            setTimeout(() => {
-                showPage('mainPage');
-            }, 2500);
-        }
-        
-        // डेट बदलने पर अपडेट करें
-        document.querySelectorAll('input[type="date"]').forEach(input => {
-            input.addEventListener('change', function() {
-                const selectedDate = new Date(this.value);
-                const formattedDate = formatDate(selectedDate);
-                
-                // संबंधित पेज के डेट डिस्प्ले अपडेट करें
-                if (this.id === 'rriDate') {
-                    document.getElementById('rriDateDisplay').textContent = formattedDate;
-                } else if (this.id === 'aCabinDate') {
-                    document.getElementById('aCabinDateDisplay').textContent = formattedDate;
-                } else if (this.id === 'bCabinDate') {
-                    document.getElementById('bCabinDateDisplay').textContent = formattedDate;
-                } else if (this.id === 'cCabinDate') {
-                    document.getElementById('cCabinDateDisplay').textContent = formattedDate;
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+            <div class="block-container">
+                <div class="block-card">
+                    <div class="block-header">DEMAND BLOCK</div>
+                    <div class="input-row">
+                        <label>UP:</label>
+                        <input type="number" min="0" value="0">
+                    </div>
+                    <div class="input-row">
+                        <label>DN:</label>
+                        <input type="number" min="0" value="0">
+                    </div>
+                    <div class="input-row">
+                        <label>Perio
