@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="hi">
 <head>
@@ -835,6 +834,71 @@
 
     <script>
 
-    
-    <script>
+   // यदि ब्लॉक संख्या 0 है तो पीरियड को 0 पर सेट करें और एडिट न करने दें
+        function updatePeriod(blockInput, periodId) {
+            const periodInput = document.getElementById(periodId);
+            
+            if (blockInput.value === "0") {
+                // ब्लॉक संख्या 0 है तो पीरियड को 0 पर सेट करें
+                periodInput.value = "0";
+                
+                // पीरियड इनपुट को डिसेबल करें ताकि एडिट न हो सके
+                periodInput.disabled = true;
+                
+                // विशेष स्टाइल एप्लाई करें
+                periodInput.classList.add('disabled-period');
+            } else {
+                // ब्लॉक संख्या 0 नहीं है तो पीरियड इनपुट को एनेबल करें
+                periodInput.disabled = false;
+                
+                // विशेष स्टाइल हटाएं
+                periodInput.classList.remove('disabled-period');
+                
+                // यदि पीरियड 0 है तो खाली करें (वैकल्पिक)
+                if (periodInput.value === "0") {
+                    periodInput.value = "";
+                }
+            }
+        }
+
+        // पेज लोड होने पर सभी पीरियड इनपुट्स को इनिशियलाइज़ करें
+        document.addEventListener('DOMContentLoaded', function() {
+            // सभी ब्लॉक इनपुट्स को ढूंढें
+            const blockInputs = document.querySelectorAll('input[type="number"][onchange*="updatePeriod"]');
+            
+            // प्रत्येक ब्लॉक इनपुट के लिए updatePeriod फ़ंक्शन को कॉल करें
+            blockInputs.forEach(input => {
+                // periodId निकालें
+                const match = input.getAttribute('onchange').match(/updatePeriod\(.*,\s*'([^']+)'\)/);
+                if (match && match[1]) {
+                    updatePeriod(input, match[1]);
+                }
+            });
+        });
+
+        // पेज बदलने का फंक्शन
+        function showPage(pageId) {
+            // सभी पेज छुपाएं
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // चुना हुआ पेज दिखाएं
+            document.getElementById(pageId).classList.add('active');
+        }
+        
+        // आज की तारीख सेट करें
+        function setToday(dateId) {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById(dateId).value = today;
+        }
+        
+        // सबमिट बटन के लिए डमी फ़ंक्शन
+        function submitForm(sheetName) {
+            alert(`डेटा ${sheetName} शीट में सबमिट किया गया!`);
+        }
+    </script>
+</body>
+</html>
+
         
