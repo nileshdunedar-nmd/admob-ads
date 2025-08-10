@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>रेलवे मेंटेनेंस रिपोर्टिंग</title>
+    <title>AJNI BLOCK RECORDS</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <style>
@@ -453,7 +453,7 @@
             <div class="main-menu">
                 <button class="menu-btn" onclick="showPage('rriPage')">
                     <i class="fas fa-clipboard-check"></i>
-                    <div>RRI Block</div>
+                    <div>RRI</div>
                 </button>
                 <button class="menu-btn" onclick="showPage('aCabinPage')">
                     <i class="fas fa-train"></i>
@@ -1226,12 +1226,24 @@
         }
         
         // यदि ब्लॉक संख्या 0 है तो पीरियड को 0 पर सेट करें
-        function updatePeriod(blockInput, periodId) {
-            const periodInput = document.getElementById(periodId);
-            if(blockInput.value === "0") {
-                periodInput.value = "0";
+        // function updatePeriod(blockInput, periodId) {
+        //     const periodInput = document.getElementById(periodId);
+        //     if(blockInput.value === "0") {
+        //         periodInput.value = "0";
+        //     }
+        // }
+        if (blockInput.value === "0") {
+            periodInput.value = "0";
+            periodInput.disabled = true;
+       } else {
+            periodInput.disabled = false;
+            // If the period is currently 0, then clear it to allow user to enter
+            if (periodInput.value === "0") {
+                periodInput.value = "";
             }
-        }
+       }
+
+
         
         // आज की तारीख सेट करें
         function setToday(dateId) {
