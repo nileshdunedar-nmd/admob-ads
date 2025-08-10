@@ -901,4 +901,43 @@
 </body>
 </html>
 
+
+function updatePeriod(blockInput, periodId) {
+    const periodInput = document.getElementById(periodId);
+    
+    if (blockInput.value === "0") {
+        // 1. पीरियड को 0 पर सेट करें
+        periodInput.value = "0";
         
+        // 2. इनपुट को डिसेबल करें ताकि एडिट न हो सके
+        periodInput.disabled = true;
+        
+        // 3. विशेष CSS क्लास एड करें (डिसेबल्ड लुक के लिए)
+        periodInput.classList.add('disabled-period');
+    } else {
+        // 1. इनपुट को एनेबल करें
+        periodInput.disabled = false;
+        
+        // 2. विशेष CSS क्लास हटाएं
+        periodInput.classList.remove('disabled-period');
+        
+        // 3. यदि पीरियड 0 है तो खाली करें (वैकल्पिक)
+        if (periodInput.value === "0") {
+            periodInput.value = "";
+        }
+    }
+}
+
+
+
+.period-input:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.disabled-period {
+    background-color: #f9f9f9 !important;
+    color: #777 !important;
+}
+
