@@ -1164,48 +1164,22 @@
     </div>
 
     <script>
-        // यदि ब्लॉक संख्या 0 है तो पीरियड को 0 पर सेट करें और एडिट न करने दें
-        function updatePeriod(blockInput, periodId) {
-            const periodInput = document.getElementById(periodId);
-            
-            if (blockInput.value === "0") {
-                // ब्लॉक संख्या 0 है तो पीरियड को 0 पर सेट करें
-                periodInput.value = "0";
-                
-                // पीरियड इनपुट को डिसेबल करें ताकि एडिट न हो सके
-                periodInput.disabled = true;
-                
-                // विशेष स्टाइल एप्लाई करें
-                periodInput.classList.add('disabled-period');
-            } else {
-                // ब्लॉक संख्या 0 नहीं है तो पीरियड इनपुट को एनेबल करें
-                periodInput.disabled = false;
-                
-                // विशेष स्टाइल हटाएं
-                periodInput.classList.remove('disabled-period');
-                
-                // यदि पीरियड 0 है तो खाली करें (वैकल्पिक)
-                if (periodInput.value === "0") {
-                    periodInput.value = "";
-                }
-            }
-        }
-
-        // पेज लोड होने पर सभी पीरियड इनपुट्स को इनिशियलाइज़ करें
+        // ऐप लोड होते ही इंटरस्टीशियल एड दिखाएं
         document.addEventListener('DOMContentLoaded', function() {
-            // सभी ब्लॉक इनपुट्स को ढूंढें
-            const blockInputs = document.querySelectorAll('input[type="number"][onchange*="updatePeriod"]');
-            
-            // प्रत्येक ब्लॉक इनपुट के लिए updatePeriod फ़ंक्शन को कॉल करें
-            blockInputs.forEach(input => {
-                // periodId निकालें
-                const match = input.getAttribute('onchange').match(/updatePeriod\(.*,\s*'([^']+)'\)/);
-                if (match && match[1]) {
-                    updatePeriod(input, match[1]);
-                }
-            });
+            document.getElementById('interstitialAd').style.display = 'flex';
+            setCurrentDate();
+            setMaxDate();
         });
-
+        
+        // एड क्लोज करने के लिए
+        document.getElementById('closeAd').addEventListener('click', function() {
+            document.getElementById('interstitialAd').style.display = 'none';
+        });
+        
+        document.getElementById('continueBtn').addEventListener('click', function() {
+            document.getElementById('interstitialAd').style.display = 'none';
+        });
+        
         // पेज बदलने का फंक्शन
         function showPage(pageId) {
             // सभी पेज छुपाएं
@@ -1215,7 +1189,61 @@
             
             // चुना हुआ पेज दिखाएं
             document.getElementById(pageId).classList.add('active');
+            
+            // डेट अपडेट करें
+            setCurrentDate();
+            setMaxDate();
         }
+        
+        // वर्तमान डेट सेट करें
+        function setCurrentDate() {
+            const today = new Date();
+            const formattedDate = formatDate(today);
+            
+            // सभी डेट इनपुट्स सेट करें
+            const dateInputs = document.querySelectorAll('input[type="date"]');
+            dateInputs.forEach(input => {
+                if(!input.value) {
+                    input.value = today.toISOString().split('T')[0];
+                }
+            });
+        }
+        
+        // भविष्य की तारीखों को रोकने के लिए
+        function setMaxDate() {
+            const today = new Date().toISOString().split('T')[0];
+            document.querySelectorAll('input[type="date"]').forEach(input => {
+                input.setAttribute('max', today);
+            });
+        }
+        
+        // डेट फॉर्मेट करने का फंक्शन (dd/mm/yyyy)
+        function formatDate(date) {
+            const day = String(date.getDate()).padStart(2, '0');
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const year = date.getFullYear();
+            return `${day}/${month}/${year}`;
+        }
+        
+        // यदि ब्लॉक संख्या 0 है तो पीरियड को 0 पर सेट करें
+        // function updatePeriod(blockInput, periodId) {
+        //     const periodInput = document.getElementById(periodId);
+        //     if(blockInput.value === "0") {
+        //         periodInput.value = "0";
+        //     }
+        // }
+        if (blockInput.value === "0") {
+            periodInput.value = "0";
+            periodInput.disabled = true;
+       } else {
+            periodInput.disabled = false;
+            // If the period is currently 0, then clear it to allow user to enter
+            if (periodInput.value === "0") {
+                periodInput.value = "";
+            }
+       }
+
+
         
         // आज की तारीख सेट करें
         function setToday(dateId) {
@@ -1223,9 +1251,38 @@
             document.getElementById(dateId).value = today;
         }
         
-        // सबमिट बटन के लिए डमी फ़ंक्शन
+        // फॉर्म सबमिशन फंक्शन
         function submitForm(sheetName) {
-            alert(`डेटा ${sheetName} शीट में सबमिट किया गया!`);
+            // डेटा एकत्रित करें
+            const date = document.querySelector('input[type="date"]').value;
+            const formattedDate = formatDate(new Date(date));
+            
+            // भविष्य की तारीख की जाँच करें
+            const today = new Date();
+            const selectedDate = new Date(date);
+            
+            if(selectedDate > today) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'अमान्य तारीख',
+                    text: 'कृपया आज या पिछली तारीख चुनें',
+                    confirmButtonText: 'ठीक है'
+                });
+                return;
+            }
+            
+            // सफलता संदेश दिखाएं
+            Swal.fire({
+                icon: 'success',
+                title: 'रिपोर्ट सबमिट हो गई!',
+                html: `<b>${formattedDate}</b> की रिपोर्ट <b>${sheetName}</b> शीट में सेव की गई है।`,
+                confirmButtonText: 'ठीक है'
+            });
+            
+            // मुख्य मेनू पर वापस जाएं
+            setTimeout(() => {
+                showPage('mainPage');
+            }, 3000);
         }
     </script>
 
