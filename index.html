@@ -36,80 +36,98 @@
     <button class="btn" onclick="showPage('c-cabin')">AJNI C CABIN</button>
   </div>
 
-  <!-- Pages Template (RRI as example, same structure for other cabins) -->
-  <div id="rri" class="page">
-    <button class="btn" onclick="showPage('home')">⬅ Home</button>
-    <h2>AJNI RRI BLOCKs</h2>
-    <label>Select Date:</label>
-    <input type="date" id="date-rri">
-
-    <!-- Engg. Block Section -->
-    <div class="section">
-      <h3>Engg. Block</h3>
-      <div class="section">
-        <h4>Demand</h4>
-        <label>UP</label><input type="number">
-        <label>Period (Min)</label><input type="number">
-        <label>DN</label><input type="number">
-        <label>Period (Min)</label><input type="number">
-      </div>
-      <div class="section">
-        <h4>Permit</h4>
-        <label>UP</label><input type="number">
-        <label>Period (Min)</label><input type="number">
-        <label>DN</label><input type="number">
-        <label>Period (Min)</label><input type="number">
-      </div>
-    </div>
-
-    <!-- OHE/TRD Block -->
-    <div class="section">
-      <h3>OHE/TRD Block</h3>
-      <div class="section">
-        <h4>Demand</h4>
-        <label>UP</label><input type="number">
-        <label>Period (Min)</label><input type="number">
-        <label>DN</label><input type="number">
-        <label>Period (Min)</label><input type="number">
-      </div>
-      <div class="section">
-        <h4>Permit</h4>
-        <label>UP</label><input type="number">
-        <label>Period (Min)</label><input type="number">
-        <label>DN</label><input type="number">
-        <label>Period (Min)</label><input type="number">
-      </div>
-    </div>
-
-    <!-- RCM/DCM Block -->
-    <div class="section">
-      <h3>RCM/DCM</h3>
-      <div class="section">
-        <h4>Demand</h4>
-        <label>UP</label><input type="number">
-        <label>Period (Min)</label><input type="number">
-        <label>DN</label><input type="number">
-        <label>Period (Min)</label><input type="number">
-      </div>
-      <div class="section">
-        <h4>Permit</h4>
-        <label>UP</label><input type="number">
-        <label>Period (Min)</label><input type="number">
-        <label>DN</label><input type="number">
-        <label>Period (Min)</label><input type="number">
-      </div>
-    </div>
-
-    <div class="section">
-      <h3>Remark</h3>
-      <textarea placeholder="Enter remarks..."></textarea>
-    </div>
-
-    <button class="btn" onclick="submitData('rri')">Submit</button>
-  </div>
-
+  <!-- Reusable function to create page -->
   <script>
-    const scriptURL = 'YOUR_GOOGLE_SCRIPT_WEB_APP_URL';
+    const scriptURLs = {
+      'rri': 'YOUR_GOOGLE_SCRIPT_RRI_URL',
+      'a-cabin': 'YOUR_GOOGLE_SCRIPT_A_URL',
+      'b-cabin': 'YOUR_GOOGLE_SCRIPT_B_URL',
+      'c-cabin': 'YOUR_GOOGLE_SCRIPT_C_URL'
+    };
+
+    const cabins = ['rri','a-cabin','b-cabin','c-cabin'];
+    const cabinTitles = {
+      'rri':'AJNI RRI BLOCKs',
+      'a-cabin':'AJNI A CABIN BLOCKs',
+      'b-cabin':'AJNI B CABIN BLOCKs',
+      'c-cabin':'AJNI C CABIN BLOCKs'
+    };
+
+    cabins.forEach(id => {
+      const div = document.createElement('div');
+      div.id = id;
+      div.className = 'page';
+
+      div.innerHTML = `
+        <button class="btn" onclick="showPage('home')">⬅ Home</button>
+        <h2>${cabinTitles[id]}</h2>
+        <label>Select Date:</label>
+        <input type="date" id="date-${id}">
+
+        <div class="section">
+          <h3>Engg. Block</h3>
+          <div class="section">
+            <h4>Demand</h4>
+            <label>UP</label><input type="number">
+            <label>Period (Min)</label><input type="number">
+            <label>DN</label><input type="number">
+            <label>Period (Min)</label><input type="number">
+          </div>
+          <div class="section">
+            <h4>Permit</h4>
+            <label>UP</label><input type="number">
+            <label>Period (Min)</label><input type="number">
+            <label>DN</label><input type="number">
+            <label>Period (Min)</label><input type="number">
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>OHE/TRD Block</h3>
+          <div class="section">
+            <h4>Demand</h4>
+            <label>UP</label><input type="number">
+            <label>Period (Min)</label><input type="number">
+            <label>DN</label><input type="number">
+            <label>Period (Min)</label><input type="number">
+          </div>
+          <div class="section">
+            <h4>Permit</h4>
+            <label>UP</label><input type="number">
+            <label>Period (Min)</label><input type="number">
+            <label>DN</label><input type="number">
+            <label>Period (Min)</label><input type="number">
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>RCM/DCM</h3>
+          <div class="section">
+            <h4>Demand</h4>
+            <label>UP</label><input type="number">
+            <label>Period (Min)</label><input type="number">
+            <label>DN</label><input type="number">
+            <label>Period (Min)</label><input type="number">
+          </div>
+          <div class="section">
+            <h4>Permit</h4>
+            <label>UP</label><input type="number">
+            <label>Period (Min)</label><input type="number">
+            <label>DN</label><input type="number">
+            <label>Period (Min)</label><input type="number">
+          </div>
+        </div>
+
+        <div class="section">
+          <h3>Remark</h3>
+          <textarea placeholder="Enter remarks..."></textarea>
+        </div>
+
+        <button class="btn" onclick="submitData('${id}')">Submit</button>
+      `;
+
+      document.body.appendChild(div);
+    });
 
     function showPage(id){
       document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -118,8 +136,8 @@
 
     function init(){
       const today = new Date().toISOString().split('T')[0];
-      ['date-rri','date-a','date-b','date-c'].forEach(id=>{
-        const el=document.getElementById(id);
+      cabins.forEach(id=>{
+        const el=document.getElementById(`date-${id}`);
         if(el){ el.value=today; el.max=today; }
       });
     }
@@ -132,7 +150,7 @@
         data[input.previousElementSibling ? input.previousElementSibling.innerText : input.id] = input.value;
       });
 
-      fetch(scriptURL, {
+      fetch(scriptURLs[pageId], {
         method: 'POST',
         body: JSON.stringify(data),
         headers: {'Content-Type':'application/json'}
