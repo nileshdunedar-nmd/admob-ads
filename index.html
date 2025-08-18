@@ -1,63 +1,148 @@
 <!DOCTYPE html>
 <html lang="hi">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>AJNI BLOCK RECORDs</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body{margin:0;padding:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0b1020;color:#fff;}
-    header{background:#121831;padding:1rem;text-align:center;}
-    header h1{margin:0;font-size:clamp(1.6rem,4vw,2.5rem);color:#6aa3ff}
-    .page{display:none;padding:20px;}
-    .active{display:block;}
-    .btn{display:block;width:100%;max-width:280px;margin:.6rem auto;padding:1rem;border-radius:.8rem;font-weight:600;font-size:1.1rem;color:#0c1021;background:linear-gradient(180deg,#6aa3ff,#4b7fe0);border:none;cursor:pointer;transition:.25s}
-    .btn:hover{transform:translateY(-2px);box-shadow:0 6px 16px rgba(0,0,0,.35)}
-    .section{margin:1.5rem 0;padding:1rem;border-radius:.8rem;background:#1a1f36}
-    .section h3{margin-top:0;color:#6aa3ff}
-    .section h4{margin-top:0;color:#ffd966;font-size:1.2rem}
-    label{display:block;margin:.6rem 0 .2rem;font-weight:500}
-    input, textarea{width:100%;padding:.5rem;border-radius:.4rem;border:1px solid #444;background:#0b1020;color:#fff}
-    input[type=number]{-moz-appearance:textfield;}
-    input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0;}
-    textarea{resize:vertical;min-height:60px}
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AJNI BLOCK RECORDs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            background: #0b1020;
+            color: #fff;
+        }
+
+        header {
+            background: #121831;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: clamp(1.6rem, 4vw, 2.5rem);
+            color: #6aa3ff
+        }
+
+        .page {
+            display: none;
+            padding: 20px;
+        }
+
+        .active {
+            display: block;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            max-width: 280px;
+            margin: .6rem auto;
+            padding: 1rem;
+            border-radius: .8rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #0c1021;
+            background: linear-gradient(180deg, #6aa3ff, #4b7fe0);
+            border: none;
+            cursor: pointer;
+            transition: .25s
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, .35)
+        }
+
+        .section {
+            margin: 1.5rem 0;
+            padding: 1rem;
+            border-radius: .8rem;
+            background: #1a1f36
+        }
+
+        .section h3 {
+            margin-top: 0;
+            color: #6aa3ff
+        }
+
+        .section h4 {
+            margin-top: 0;
+            color: #ffd966;
+            font-size: 1.2rem
+        }
+
+        label {
+            display: block;
+            margin: .6rem 0 .2rem;
+            font-weight: 500
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: .5rem;
+            border-radius: .4rem;
+            border: 1px solid #444;
+            background: #0b1020;
+            color: #fff
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 60px
+        }
+    </style>
 </head>
+
 <body onload="init()">
-  <header>
-    <h1>🚦 AJNI BLOCK RECORDs</h1>
-  </header>
+    <header>
+        <h1>🚦 AJNI BLOCK RECORDs</h1>
+    </header>
 
-  <!-- Home Page -->
-  <div id="home" class="page active">
-    <button class="btn" onclick="showPage('rri')">AJNI RRI</button>
-    <button class="btn" onclick="showPage('a-cabin')">AJNI A CABIN</button>
-    <button class="btn" onclick="showPage('b-cabin')">AJNI B CABIN</button>
-    <button class="btn" onclick="showPage('c-cabin')">AJNI C CABIN</button>
-  </div>
+    <!-- Home Page -->
+    <div id="home" class="page active">
+        <button class="btn" onclick="showPage('rri')">AJNI RRI</button>
+        <button class="btn" onclick="showPage('a-cabin')">AJNI A CABIN</button>
+        <button class="btn" onclick="showPage('b-cabin')">AJNI B CABIN</button>
+        <button class="btn" onclick="showPage('c-cabin')">AJNI C CABIN</button>
+    </div>
 
-  <script>
-    const scriptURLs = {
-      'rri': 'YOUR_GOOGLE_SCRIPT_RRI_URL',
-      'a-cabin': 'YOUR_GOOGLE_SCRIPT_A_URL',
-      'b-cabin': 'YOUR_GOOGLE_SCRIPT_B_URL',
-      'c-cabin': 'YOUR_GOOGLE_SCRIPT_C_URL'
-    };
+    <script>
+        const scriptURLs = {
+            'rri': 'https://script.google.com/macros/s/AKfycbxSjARIYMXE2E_lxSPLUA3QYRO_B7q505mLRNTfbDLymzFYWockCVPEaCw8NTeTCcCvSw/exec',
+            'a-cabin': 'https://script.google.com/macros/s/AKfycbw1UU2fzGdWiDr9pj29NcBhawt3DT-kqC7GXvM4P5dlVfC-oMv6iW4IP2C8YYKnVLvOmQ/exec',
+            'b-cabin': 'https://script.google.com/macros/s/AKfycbxdZvR1StECHbZ_bjYBZLnzkAuFrkUmuJv0okJpBtbGYHv40rz7NiwoUPXzvbhtXKu9fA/exec',
+            'c-cabin': 'https://script.google.com/macros/s/AKfycbzItspp3E8TfF9ZLL1RJ4ZpRH8rVr0pAF839YA1Skks00joqU8AoeuP46ni_TIa__nlTQ/exec'
+        };
 
-    const cabins = ['rri','a-cabin','b-cabin','c-cabin'];
-    const cabinTitles = {
-      'rri':'AJNI RRI BLOCKs',
-      'a-cabin':'AJNI A CABIN BLOCKs',
-      'b-cabin':'AJNI B CABIN BLOCKs',
-      'c-cabin':'AJNI C CABIN BLOCKs'
-    };
+        const cabins = ['rri', 'a-cabin', 'b-cabin', 'c-cabin'];
+        const cabinTitles = {
+            'rri': 'AJNI RRI BLOCKs',
+            'a-cabin': 'AJNI A CABIN BLOCKs',
+            'b-cabin': 'AJNI B CABIN BLOCKs',
+            'c-cabin': 'AJNI C CABIN BLOCKs'
+        };
 
-    cabins.forEach(id => {
-      const div = document.createElement('div');
-      div.id = id;
-      div.className = 'page';
+        cabins.forEach(id => {
+            const div = document.createElement('div');
+            div.id = id;
+            div.className = 'page';
 
-      div.innerHTML = `
+            div.innerHTML = `
         <button class="btn" onclick="showPage('home')">⬅ Home</button>
         <h2>${cabinTitles[id]}</h2>
         <label>Select Date:</label>
@@ -125,52 +210,57 @@
         <button class="btn" onclick="submitData('${id}')">Submit</button>
       `;
 
-      document.body.appendChild(div);
-    });
+            document.body.appendChild(div);
+        });
 
-    function showPage(id){
-      document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-    }
+        function showPage(id) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+        }
 
-    function init(){
-      const today = new Date().toISOString().split('T')[0];
-      cabins.forEach(id=>{
-        const el=document.getElementById(`date-${id}`);
-        if(el){ el.value=today; el.max=today; }
-      });
-    }
+        function init() {
+            const today = new Date().toISOString().split('T')[0];
+            cabins.forEach(id => {
+                const el = document.getElementById(`date-${id}`);
+                if (el) { el.value = today; el.max = today; }
+            });
+        }
 
-    function submitData(pageId){
-      const page = document.getElementById(pageId);
-      const inputs = page.querySelectorAll('input, textarea');
-      const data = {};
+        function submitData(pageId) {
+            const page = document.getElementById(pageId);
+            const inputs = page.querySelectorAll('input, textarea');
+            const data = {};
 
-      // Add date and time
-      const now = new Date();
-      data['Date'] = document.getElementById(`date-${pageId}`).value;
-      data['Time'] = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0') + ':' + now.getSeconds().toString().padStart(2,'0');
+            // First column: input date
+            data['Input Date'] = document.getElementById(`date-${pageId}`).value;
 
-      inputs.forEach(input => {
-        if(input.type !== 'date') data[input.previousElementSibling ? input.previousElementSibling.innerText : input.id] = input.value;
-      });
+            // Second column: submit date & time
+            const now = new Date();
+            data['Submit DateTime'] = now.toLocaleString();
 
-      fetch(scriptURLs[pageId], {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {'Content-Type':'application/json'}
-      })
-      .then(response => response.text())
-      .then(result => {
-        alert('Data saved successfully!');
-        inputs.forEach(input => input.value='');
-        showPage('home');
-      })
-      .catch(error => {
-        alert('Error submitting data');
-        console.error('Error:', error);
-      });
-    }
-  </script>
+            // Collect input values
+            inputs.forEach(input => {
+                if (input.type !== 'date') data[input.previousElementSibling ? input.previousElementSibling.innerText : input.id] = input.value;
+            });
+
+            // Send data to respective Web App
+            fetch(scriptURLs[pageId], {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' }
+            })
+                .then(response => response.text())
+                .then(result => {
+                    alert('Data saved successfully!');
+                    inputs.forEach(input => input.value = '');
+                    showPage('home');
+                })
+                .catch(error => {
+                    alert('Error submitting data');
+                    console.error('Error:', error);
+                });
+        }
+    </script>
 </body>
+
 </html>
