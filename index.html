@@ -36,7 +36,6 @@
     <button class="btn" onclick="showPage('c-cabin')">AJNI C CABIN</button>
   </div>
 
-  <!-- Reusable function to create page -->
   <script>
     const scriptURLs = {
       'rri': 'YOUR_GOOGLE_SCRIPT_RRI_URL',
@@ -146,8 +145,14 @@
       const page = document.getElementById(pageId);
       const inputs = page.querySelectorAll('input, textarea');
       const data = {};
+
+      // Add date and time
+      const now = new Date();
+      data['Date'] = document.getElementById(`date-${pageId}`).value;
+      data['Time'] = now.getHours().toString().padStart(2,'0') + ':' + now.getMinutes().toString().padStart(2,'0') + ':' + now.getSeconds().toString().padStart(2,'0');
+
       inputs.forEach(input => {
-        data[input.previousElementSibling ? input.previousElementSibling.innerText : input.id] = input.value;
+        if(input.type !== 'date') data[input.previousElementSibling ? input.previousElementSibling.innerText : input.id] = input.value;
       });
 
       fetch(scriptURLs[pageId], {
