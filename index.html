@@ -1,19 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>AJNI BLOCK RECORDs</title>
-    <style>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f9f9f9;
+    }
+
+    .page {
+      display: none;
+      padding: 15px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    form {
+      background: #fff;
+      padding: 15px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      margin: auto;
+    }
+
+    h3 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #444;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+
+    label {
+      display: block;
+      margin: 10px 0 5px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .btn:hover {
+      background: #0056b3;
+    }
+
+    /* 🔹 Mobile Responsive */
+    @media (max-width: 600px) {
+      body {
+        font-size: 14px;
+      }
+
+      form {
+        padding: 10px;
+        border-radius: 8px;
+      }
+
+      input,
+      textarea,
+      select {
+        font-size: 13px;
+        padding: 8px;
+      }
+
+      h2 {
+        font-size: 20px;
+      }
+
+      h3 {
+        font-size: 16px;
+      }
+
+      .btn {
+        font-size: 15px;
+        padding: 10px;
+      }
+    }
+  </style>
+
+
+  <style>
     .form-grid {
       display: grid;
-      grid-template-columns: 200px 1fr; /* Label - Input */
+      grid-template-columns: 200px 1fr;
+      /* Label - Input */
       gap: 10px 20px;
       max-width: 600px;
       margin: 0 auto;
     }
 
     .form-grid h3 {
-      grid-column: 1 / -1;  /* Full width */
+      grid-column: 1 / -1;
+      /* Full width */
       margin-top: 20px;
     }
 
@@ -23,7 +137,9 @@
       margin-top: 15px;
     }
 
-    input, textarea, button {
+    input,
+    textarea,
+    button {
       padding: 6px;
       font-size: 14px;
       width: 100%;
@@ -42,6 +158,7 @@
       cursor: pointer;
       border-radius: 4px;
     }
+
     button.btn:hover {
       background: #0056b3;
     }
@@ -53,17 +170,20 @@
       margin: 20px;
       background: #f4f4f9;
     }
+
     h2 {
       color: #333;
     }
+
     .page {
       display: none;
       margin-top: 20px;
       padding: 20px;
       background: #fff;
       border-radius: 8px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
+
     .btn {
       padding: 10px 15px;
       margin: 5px;
@@ -74,6 +194,7 @@
       color: white;
       font-size: 14px;
     }
+
     input {
       margin: 8px 0;
       padding: 8px;
@@ -83,344 +204,359 @@
     }
   </style>
 </head>
-<body onload="showPage('home')">
-  
 
-  
+<body onload="showPage('home')">
+
+
+
   <!-- Home Page -->
   <!-- <div id="home" class="page"> -->
-    <h2>🚦 AJNI BLOCK RECORDs</h2>
-      <button class="btn" onclick="openPage('RRI')">RRI</button>
-      <button class="btn" onclick="openPage('A Cabin')">A Cabin</button>
-      <button class="btn" onclick="openPage('B Cabin')">B Cabin</button>
-      <button class="btn" onclick="openPage('C Cabin')">C Cabin</button>
+  <h2>🚦 AJNI BLOCK RECORDs</h2>
+  <button class="btn" onclick="openPage('RRI')">RRI</button>
+  <button class="btn" onclick="openPage('A Cabin')">A Cabin</button>
+  <button class="btn" onclick="openPage('B Cabin')">B Cabin</button>
+  <button class="btn" onclick="openPage('C Cabin')">C Cabin</button>
   <!-- </div> -->
 
 
-<!-- RRI Page (Dark Theme) -->
-<div id="RRI" class="page dark">
-  <h2 class="title">AJNI RRI BLOCK</h2>
-  <form id="rri_form" class="form-card">
+  <!-- RRI Page (Dark Theme) -->
+  <div id="RRI" class="page dark">
+    <h2 class="title">AJNI RRI BLOCK</h2>
+    <form id="rri_form" class="form-card">
 
-    <div class="form-section">
-      <label>Date</label>
-      <input type="date" id="rri_date" max="">
-    </div>
+      <div class="form-section">
+        <label>Date</label>
+        <input type="date" id="rri_date" max="">
+      </div>
 
-    <!-- Engg. Block -->
-    <h3 class="section-title">Engg. Block</h3>
-    <div class="form-grid">
-      <div><label>Demand Up</label><input type="number" id="rri_eng_up_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="rri_eng_up_dmand_period"></div>
-      <div><label>Demand Dn</label><input type="number" id="rri_eng_dn_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="rri_eng_dn_dmand_period"></div>
-      <div><label>Permit Up</label><input type="number" id="rri_eng_up_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="rri_eng_up_Permit_period"></div>
-      <div><label>Permit Dn</label><input type="number" id="rri_eng_dn_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="rri_eng_dn_Permit_period"></div>
-    </div>
+      <!-- Engg. Block -->
+      <h3 class="section-title">Engg. Block</h3>
+      <div class="form-grid">
+        <div><label>Demand Up</label><input type="number" id="rri_eng_up_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="rri_eng_up_dmand_period"></div>
+        <div><label>Demand Dn</label><input type="number" id="rri_eng_dn_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="rri_eng_dn_dmand_period"></div>
+        <div><label>Permit Up</label><input type="number" id="rri_eng_up_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="rri_eng_up_Permit_period"></div>
+        <div><label>Permit Dn</label><input type="number" id="rri_eng_dn_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="rri_eng_dn_Permit_period"></div>
+      </div>
 
-    <!-- OHE Block -->
-    <h3 class="section-title">OHE Block</h3>
-    <div class="form-grid">
-      <div><label>Demand Up</label><input type="number" id="rri_ohe_up_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="rri_ohe_up_dmand_period"></div>
-      <div><label>Demand Dn</label><input type="number" id="rri_ohe_dn_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="rri_ohe_dn_dmand_period"></div>
-      <div><label>Permit Up</label><input type="number" id="rri_ohe_up_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="rri_ohe_up_Permit_period"></div>
-      <div><label>Permit Dn</label><input type="number" id="rri_ohe_dn_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="rri_ohe_dn_Permit_period"></div>
-    </div>
+      <!-- OHE Block -->
+      <h3 class="section-title">OHE Block</h3>
+      <div class="form-grid">
+        <div><label>Demand Up</label><input type="number" id="rri_ohe_up_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="rri_ohe_up_dmand_period"></div>
+        <div><label>Demand Dn</label><input type="number" id="rri_ohe_dn_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="rri_ohe_dn_dmand_period"></div>
+        <div><label>Permit Up</label><input type="number" id="rri_ohe_up_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="rri_ohe_up_Permit_period"></div>
+        <div><label>Permit Dn</label><input type="number" id="rri_ohe_dn_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="rri_ohe_dn_Permit_period"></div>
+      </div>
 
-    <!-- RCM/DCM -->
-    <h3 class="section-title">RCM / DCM</h3>
-    <div class="form-grid">
-      <div><label>Demand Up</label><input type="number" id="rri_rcmdcm_up_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="rri_rcmdcm_up_dmand_period"></div>
-      <div><label>Demand Dn</label><input type="number" id="rri_rcmdcm_dn_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="rri_rcmdcm_dn_dmand_period"></div>
-      <div><label>Permit Up</label><input type="number" id="rri_rcmdcm_up_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="rri_rcmdcm_up_Permit_period"></div>
-      <div><label>Permit Dn</label><input type="number" id="rri_rcmdcm_dn_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="rri_rcmdcm_dn_Permit_period"></div>
-    </div>
+      <!-- RCM/DCM -->
+      <h3 class="section-title">RCM / DCM</h3>
+      <div class="form-grid">
+        <div><label>Demand Up</label><input type="number" id="rri_rcmdcm_up_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="rri_rcmdcm_up_dmand_period"></div>
+        <div><label>Demand Dn</label><input type="number" id="rri_rcmdcm_dn_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="rri_rcmdcm_dn_dmand_period"></div>
+        <div><label>Permit Up</label><input type="number" id="rri_rcmdcm_up_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="rri_rcmdcm_up_Permit_period"></div>
+        <div><label>Permit Dn</label><input type="number" id="rri_rcmdcm_dn_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="rri_rcmdcm_dn_Permit_period"></div>
+      </div>
 
-    <!-- Remarks -->
-    <div class="form-section">
-      <label>Remarks</label>
-      <textarea id="rri_remark" rows="3"></textarea>
-    </div>
+      <!-- Remarks -->
+      <div class="form-section">
+        <label>Remarks</label>
+        <textarea id="rri_remark" rows="3"></textarea>
+      </div>
 
-    <button type="button" class="btn" onclick="submitData('RRI')">Submit</button>
-  </form>
-</div>
+      <button type="button" class="btn" onclick="submitData('RRI')">Submit</button>
+    </form>
+  </div>
 
-<!-- DARK THEME CSS -->
-<style>
-  body {
-    background: #0f172a; /* dark navy */
-    color: #e2e8f0;
-    font-family: Arial, sans-serif;
-  }
-  .title {
-    text-align: center;
-    color: #38bdf8;
-    font-size: 26px;
-    margin-bottom: 20px;
-  }
-  .form-card {
-    background: #1e293b;
-    padding: 20px;
-    border-radius: 12px;
-    max-width: 900px;
-    margin: auto;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.6);
-  }
-  .section-title {
-    margin-top: 20px;
-    color: #a78bfa;
-    font-size: 20px;
-    border-bottom: 1px solid #334155;
-    padding-bottom: 5px;
-  }
-  .form-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 10px;
-  }
-  .form-section {
-    margin-top: 15px;
-  }
-  label {
-    font-weight: 600;
-    color: #cbd5e1;
-    display: block;
-    margin-bottom: 4px;
-  }
-  input, textarea {
-    width: 100%;
-    padding: 8px 10px;
-    border-radius: 6px;
-    border: 1px solid #475569;
-    background: #0f172a;
-    color: #f1f5f9;
-    font-size: 14px;
-    transition: 0.2s;
-  }
-  input:focus, textarea:focus {
-    border-color: #38bdf8;
-    outline: none;
-    box-shadow: 0px 0px 8px rgba(56,189,248,0.4);
-  }
-  textarea {
-    resize: none;
-  }
-  .btn {
-    margin-top: 20px;
-    background: linear-gradient(90deg, #6366f1, #3b82f6);
-    color: white;
-    padding: 10px 18px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: 0.3s;
-  }
-  .btn:hover {
-    background: linear-gradient(90deg, #4338ca, #1e40af);
-  }
-</style>
+  <!-- DARK THEME CSS -->
+  <style>
+    body {
+      background: #0f172a;
+      /* dark navy */
+      color: #e2e8f0;
+      font-family: Arial, sans-serif;
+    }
 
+    .title {
+      text-align: center;
+      color: #38bdf8;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
 
-<!-- A Cabin Page (Dark Theme) -->
-<div id="A Cabin" class="page dark">
-  <h2 class="title">AJNI A CABIN BLOCK</h2>
-  <form id="acabin_form" class="form-card">
+    .form-card {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 900px;
+      margin: auto;
+      box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.6);
+    }
 
-    <div class="form-section">
-      <label>Date</label>
-      <input type="date" id="acabin_date" max="">
-    </div>
+    .section-title {
+      margin-top: 20px;
+      color: #a78bfa;
+      font-size: 20px;
+      border-bottom: 1px solid #334155;
+      padding-bottom: 5px;
+    }
 
-    <!-- Engg. Block -->
-    <h3 class="section-title">Engg. Block</h3>
-    <div class="form-grid">
-      <div><label>Demand Up</label><input type="number" id="acabin_eng_up_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="acabin_eng_up_dmand_period"></div>
-      <div><label>Demand Dn</label><input type="number" id="acabin_eng_dn_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="acabin_eng_dn_dmand_period"></div>
-      <div><label>Permit Up</label><input type="number" id="acabin_eng_up_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="acabin_eng_up_Permit_period"></div>
-      <div><label>Permit Dn</label><input type="number" id="acabin_eng_dn_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="acabin_eng_dn_Permit_period"></div>
-    </div>
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 10px;
+    }
 
-    <!-- OHE Block -->
-    <h3 class="section-title">OHE Block</h3>
-    <div class="form-grid">
-      <div><label>Demand Up</label><input type="number" id="acabin_ohe_up_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="acabin_ohe_up_dmand_period"></div>
-      <div><label>Demand Dn</label><input type="number" id="acabin_ohe_dn_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="acabin_ohe_dn_dmand_period"></div>
-      <div><label>Permit Up</label><input type="number" id="acabin_ohe_up_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="acabin_ohe_up_Permit_period"></div>
-      <div><label>Permit Dn</label><input type="number" id="acabin_ohe_dn_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="acabin_ohe_dn_Permit_period"></div>
-    </div>
+    .form-section {
+      margin-top: 15px;
+    }
 
-    <!-- RCM/DCM -->
-    <h3 class="section-title">RCM / DCM</h3>
-    <div class="form-grid">
-      <div><label>Demand Up</label><input type="number" id="acabin_rcmdcm_up_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="acabin_rcmdcm_up_dmand_period"></div>
-      <div><label>Demand Dn</label><input type="number" id="acabin_rcmdcm_dn_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="acabin_rcmdcm_dn_dmand_period"></div>
-      <div><label>Permit Up</label><input type="number" id="acabin_rcmdcm_up_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="acabin_rcmdcm_up_Permit_period"></div>
-      <div><label>Permit Dn</label><input type="number" id="acabin_rcmdcm_dn_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="acabin_rcmdcm_dn_Permit_period"></div>
-    </div>
+    label {
+      font-weight: 600;
+      color: #cbd5e1;
+      display: block;
+      margin-bottom: 4px;
+    }
 
-    <!-- Remarks -->
-    <div class="form-section">
-      <label>Remarks</label>
-      <textarea id="acabin_remark" rows="3"></textarea>
-    </div>
+    input,
+    textarea {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #475569;
+      background: #0f172a;
+      color: #f1f5f9;
+      font-size: 14px;
+      transition: 0.2s;
+    }
 
-    <button type="button" class="btn" onclick="submitData('A Cabin')">Submit</button>
-  </form>
-</div>
+    input:focus,
+    textarea:focus {
+      border-color: #38bdf8;
+      outline: none;
+      box-shadow: 0px 0px 8px rgba(56, 189, 248, 0.4);
+    }
+
+    textarea {
+      resize: none;
+    }
+
+    .btn {
+      margin-top: 20px;
+      background: linear-gradient(90deg, #6366f1, #3b82f6);
+      color: white;
+      padding: 10px 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: linear-gradient(90deg, #4338ca, #1e40af);
+    }
+  </style>
 
 
+  <!-- A Cabin Page (Dark Theme) -->
+  <div id="A Cabin" class="page dark">
+    <h2 class="title">AJNI A CABIN BLOCK</h2>
+    <form id="acabin_form" class="form-card">
 
-<!-- B Cabin Page (Dark Theme) -->
-<div id="B Cabin" class="page dark">
-  <h2 class="title">AJNI B CABIN BLOCK</h2>
-  <form id="bcabin_form" class="form-card">
+      <div class="form-section">
+        <label>Date</label>
+        <input type="date" id="acabin_date" max="">
+      </div>
 
-    <div class="form-section">
-      <label>Date</label>
-      <input type="date" id="bcabin_date" max="">
-    </div>
+      <!-- Engg. Block -->
+      <h3 class="section-title">Engg. Block</h3>
+      <div class="form-grid">
+        <div><label>Demand Up</label><input type="number" id="acabin_eng_up_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="acabin_eng_up_dmand_period"></div>
+        <div><label>Demand Dn</label><input type="number" id="acabin_eng_dn_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="acabin_eng_dn_dmand_period"></div>
+        <div><label>Permit Up</label><input type="number" id="acabin_eng_up_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="acabin_eng_up_Permit_period"></div>
+        <div><label>Permit Dn</label><input type="number" id="acabin_eng_dn_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="acabin_eng_dn_Permit_period"></div>
+      </div>
 
-    <!-- Engg. Block -->
-    <h3 class="section-title">Engg. Block</h3>
-    <div class="form-grid">
-      <div><label>Demand Up</label><input type="number" id="bcabin_eng_up_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="bcabin_eng_up_dmand_period"></div>
-      <div><label>Demand Dn</label><input type="number" id="bcabin_eng_dn_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="bcabin_eng_dn_dmand_period"></div>
-      <div><label>Permit Up</label><input type="number" id="bcabin_eng_up_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="bcabin_eng_up_Permit_period"></div>
-      <div><label>Permit Dn</label><input type="number" id="bcabin_eng_dn_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="bcabin_eng_dn_Permit_period"></div>
-    </div>
+      <!-- OHE Block -->
+      <h3 class="section-title">OHE Block</h3>
+      <div class="form-grid">
+        <div><label>Demand Up</label><input type="number" id="acabin_ohe_up_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="acabin_ohe_up_dmand_period"></div>
+        <div><label>Demand Dn</label><input type="number" id="acabin_ohe_dn_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="acabin_ohe_dn_dmand_period"></div>
+        <div><label>Permit Up</label><input type="number" id="acabin_ohe_up_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="acabin_ohe_up_Permit_period"></div>
+        <div><label>Permit Dn</label><input type="number" id="acabin_ohe_dn_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="acabin_ohe_dn_Permit_period"></div>
+      </div>
 
-    <!-- OHE Block -->
-    <h3 class="section-title">OHE Block</h3>
-    <div class="form-grid">
-      <div><label>Demand Up</label><input type="number" id="bcabin_ohe_up_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="bcabin_ohe_up_dmand_period"></div>
-      <div><label>Demand Dn</label><input type="number" id="bcabin_ohe_dn_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="bcabin_ohe_dn_dmand_period"></div>
-      <div><label>Permit Up</label><input type="number" id="bcabin_ohe_up_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="bcabin_ohe_up_Permit_period"></div>
-      <div><label>Permit Dn</label><input type="number" id="bcabin_ohe_dn_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="bcabin_ohe_dn_Permit_period"></div>
-    </div>
+      <!-- RCM/DCM -->
+      <h3 class="section-title">RCM / DCM</h3>
+      <div class="form-grid">
+        <div><label>Demand Up</label><input type="number" id="acabin_rcmdcm_up_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="acabin_rcmdcm_up_dmand_period"></div>
+        <div><label>Demand Dn</label><input type="number" id="acabin_rcmdcm_dn_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="acabin_rcmdcm_dn_dmand_period"></div>
+        <div><label>Permit Up</label><input type="number" id="acabin_rcmdcm_up_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="acabin_rcmdcm_up_Permit_period"></div>
+        <div><label>Permit Dn</label><input type="number" id="acabin_rcmdcm_dn_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="acabin_rcmdcm_dn_Permit_period"></div>
+      </div>
 
-    <!-- RCM/DCM -->
-    <h3 class="section-title">RCM / DCM</h3>
-    <div class="form-grid">
-      <div><label>Demand Up</label><input type="number" id="bcabin_rcmdcm_up_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="bcabin_rcmdcm_up_dmand_period"></div>
-      <div><label>Demand Dn</label><input type="number" id="bcabin_rcmdcm_dn_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="bcabin_rcmdcm_dn_dmand_period"></div>
-      <div><label>Permit Up</label><input type="number" id="bcabin_rcmdcm_up_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="bcabin_rcmdcm_up_Permit_period"></div>
-      <div><label>Permit Dn</label><input type="number" id="bcabin_rcmdcm_dn_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="bcabin_rcmdcm_dn_Permit_period"></div>
-    </div>
+      <!-- Remarks -->
+      <div class="form-section">
+        <label>Remarks</label>
+        <textarea id="acabin_remark" rows="3"></textarea>
+      </div>
 
-    <!-- Remarks -->
-    <div class="form-section">
-      <label>Remarks</label>
-      <textarea id="bcabin_remark" rows="3"></textarea>
-    </div>
-
-    <button type="button" class="btn" onclick="submitData('B Cabin')">Submit</button>
-  </form>
-</div>
+      <button type="button" class="btn" onclick="submitData('A Cabin')">Submit</button>
+    </form>
+  </div>
 
 
-<!-- C Cabin Page (Dark Theme) -->
-<div id="C Cabin" class="page dark">
-  <h2 class="title">AJNI C CABIN BLOCK</h2>
-  <form id="ccabin_form" class="form-card">
 
-    <div class="form-section">
-      <label>Date</label>
-      <input type="date" id="ccabin_date" max="">
-    </div>
+  <!-- B Cabin Page (Dark Theme) -->
+  <div id="B Cabin" class="page dark">
+    <h2 class="title">AJNI B CABIN BLOCK</h2>
+    <form id="bcabin_form" class="form-card">
 
-    <!-- Engg. Block -->
-    <h3 class="section-title">Engg. Block</h3>
-    <div class="form-grid">
-      <div><label>Demand Up</label><input type="number" id="ccabin_eng_up_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="ccabin_eng_up_dmand_period"></div>
-      <div><label>Demand Dn</label><input type="number" id="ccabin_eng_dn_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="ccabin_eng_dn_dmand_period"></div>
-      <div><label>Permit Up</label><input type="number" id="ccabin_eng_up_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="ccabin_eng_up_Permit_period"></div>
-      <div><label>Permit Dn</label><input type="number" id="ccabin_eng_dn_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="ccabin_eng_dn_Permit_period"></div>
-    </div>
+      <div class="form-section">
+        <label>Date</label>
+        <input type="date" id="bcabin_date" max="">
+      </div>
 
-    <!-- OHE Block -->
-    <h3 class="section-title">OHE Block</h3>
-    <div class="form-grid">
-      <div><label>Demand Up</label><input type="number" id="ccabin_ohe_up_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="ccabin_ohe_up_dmand_period"></div>
-      <div><label>Demand Dn</label><input type="number" id="ccabin_ohe_dn_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="ccabin_ohe_dn_dmand_period"></div>
-      <div><label>Permit Up</label><input type="number" id="ccabin_ohe_up_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="ccabin_ohe_up_Permit_period"></div>
-      <div><label>Permit Dn</label><input type="number" id="ccabin_ohe_dn_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="ccabin_ohe_dn_Permit_period"></div>
-    </div>
+      <!-- Engg. Block -->
+      <h3 class="section-title">Engg. Block</h3>
+      <div class="form-grid">
+        <div><label>Demand Up</label><input type="number" id="bcabin_eng_up_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="bcabin_eng_up_dmand_period"></div>
+        <div><label>Demand Dn</label><input type="number" id="bcabin_eng_dn_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="bcabin_eng_dn_dmand_period"></div>
+        <div><label>Permit Up</label><input type="number" id="bcabin_eng_up_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="bcabin_eng_up_Permit_period"></div>
+        <div><label>Permit Dn</label><input type="number" id="bcabin_eng_dn_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="bcabin_eng_dn_Permit_period"></div>
+      </div>
 
-    <!-- RCM/DCM -->
-    <h3 class="section-title">RCM / DCM</h3>
-    <div class="form-grid">
-      <div><label>Demand Up</label><input type="number" id="ccabin_rcmdcm_up_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="ccabin_rcmdcm_up_dmand_period"></div>
-      <div><label>Demand Dn</label><input type="number" id="ccabin_rcmdcm_dn_demand"></div>
-      <div><label>Period (min)</label><input type="number" id="ccabin_rcmdcm_dn_dmand_period"></div>
-      <div><label>Permit Up</label><input type="number" id="ccabin_rcmdcm_up_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="ccabin_rcmdcm_up_Permit_period"></div>
-      <div><label>Permit Dn</label><input type="number" id="ccabin_rcmdcm_dn_Permit"></div>
-      <div><label>Period (min)</label><input type="number" id="ccabin_rcmdcm_dn_Permit_period"></div>
-    </div>
+      <!-- OHE Block -->
+      <h3 class="section-title">OHE Block</h3>
+      <div class="form-grid">
+        <div><label>Demand Up</label><input type="number" id="bcabin_ohe_up_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="bcabin_ohe_up_dmand_period"></div>
+        <div><label>Demand Dn</label><input type="number" id="bcabin_ohe_dn_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="bcabin_ohe_dn_dmand_period"></div>
+        <div><label>Permit Up</label><input type="number" id="bcabin_ohe_up_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="bcabin_ohe_up_Permit_period"></div>
+        <div><label>Permit Dn</label><input type="number" id="bcabin_ohe_dn_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="bcabin_ohe_dn_Permit_period"></div>
+      </div>
 
-    <!-- Remarks -->
-    <div class="form-section">
-      <label>Remarks</label>
-      <textarea id="ccabin_remark" rows="3"></textarea>
-    </div>
+      <!-- RCM/DCM -->
+      <h3 class="section-title">RCM / DCM</h3>
+      <div class="form-grid">
+        <div><label>Demand Up</label><input type="number" id="bcabin_rcmdcm_up_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="bcabin_rcmdcm_up_dmand_period"></div>
+        <div><label>Demand Dn</label><input type="number" id="bcabin_rcmdcm_dn_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="bcabin_rcmdcm_dn_dmand_period"></div>
+        <div><label>Permit Up</label><input type="number" id="bcabin_rcmdcm_up_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="bcabin_rcmdcm_up_Permit_period"></div>
+        <div><label>Permit Dn</label><input type="number" id="bcabin_rcmdcm_dn_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="bcabin_rcmdcm_dn_Permit_period"></div>
+      </div>
 
-    <button type="button" class="btn" onclick="submitData('C Cabin')">Submit</button>
-  </form>
-</div>
+      <!-- Remarks -->
+      <div class="form-section">
+        <label>Remarks</label>
+        <textarea id="bcabin_remark" rows="3"></textarea>
+      </div>
+
+      <button type="button" class="btn" onclick="submitData('B Cabin')">Submit</button>
+    </form>
+  </div>
+
+
+  <!-- C Cabin Page (Dark Theme) -->
+  <div id="C Cabin" class="page dark">
+    <h2 class="title">AJNI C CABIN BLOCK</h2>
+    <form id="ccabin_form" class="form-card">
+
+      <div class="form-section">
+        <label>Date</label>
+        <input type="date" id="ccabin_date" max="">
+      </div>
+
+      <!-- Engg. Block -->
+      <h3 class="section-title">Engg. Block</h3>
+      <div class="form-grid">
+        <div><label>Demand Up</label><input type="number" id="ccabin_eng_up_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="ccabin_eng_up_dmand_period"></div>
+        <div><label>Demand Dn</label><input type="number" id="ccabin_eng_dn_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="ccabin_eng_dn_dmand_period"></div>
+        <div><label>Permit Up</label><input type="number" id="ccabin_eng_up_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="ccabin_eng_up_Permit_period"></div>
+        <div><label>Permit Dn</label><input type="number" id="ccabin_eng_dn_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="ccabin_eng_dn_Permit_period"></div>
+      </div>
+
+      <!-- OHE Block -->
+      <h3 class="section-title">OHE Block</h3>
+      <div class="form-grid">
+        <div><label>Demand Up</label><input type="number" id="ccabin_ohe_up_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="ccabin_ohe_up_dmand_period"></div>
+        <div><label>Demand Dn</label><input type="number" id="ccabin_ohe_dn_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="ccabin_ohe_dn_dmand_period"></div>
+        <div><label>Permit Up</label><input type="number" id="ccabin_ohe_up_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="ccabin_ohe_up_Permit_period"></div>
+        <div><label>Permit Dn</label><input type="number" id="ccabin_ohe_dn_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="ccabin_ohe_dn_Permit_period"></div>
+      </div>
+
+      <!-- RCM/DCM -->
+      <h3 class="section-title">RCM / DCM</h3>
+      <div class="form-grid">
+        <div><label>Demand Up</label><input type="number" id="ccabin_rcmdcm_up_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="ccabin_rcmdcm_up_dmand_period"></div>
+        <div><label>Demand Dn</label><input type="number" id="ccabin_rcmdcm_dn_demand"></div>
+        <div><label>Period (min)</label><input type="number" id="ccabin_rcmdcm_dn_dmand_period"></div>
+        <div><label>Permit Up</label><input type="number" id="ccabin_rcmdcm_up_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="ccabin_rcmdcm_up_Permit_period"></div>
+        <div><label>Permit Dn</label><input type="number" id="ccabin_rcmdcm_dn_Permit"></div>
+        <div><label>Period (min)</label><input type="number" id="ccabin_rcmdcm_dn_Permit_period"></div>
+      </div>
+
+      <!-- Remarks -->
+      <div class="form-section">
+        <label>Remarks</label>
+        <textarea id="ccabin_remark" rows="3"></textarea>
+      </div>
+
+      <button type="button" class="btn" onclick="submitData('C Cabin')">Submit</button>
+    </form>
+  </div>
 
 
   <script>
 
-    window.onload = function() {
+    window.onload = function () {
       // आज की तारीख YYYY-MM-DD format में निकालना
       let today = new Date().toISOString().split("T")[0];
-      
+
       // RRI Page का date field
       document.getElementById("rri_date").value = today;
       document.getElementById("rri_date").setAttribute("max", today);
@@ -436,86 +572,94 @@
       });
     };
 
-  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwOYa_N-50rtaAgqYuRuEjZcwjzoKXIbz-jQ88lFzlWYPZd8-CVKEt8YU6gXOY8E6Ev_w/exec"; 
+    const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwOYa_N-50rtaAgqYuRuEjZcwjzoKXIbz-jQ88lFzlWYPZd8-CVKEt8YU6gXOY8E6Ev_w/exec";
 
-  function openPage(pageId) {
-    document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-    document.getElementById(pageId).style.display = 'block';
-  }
-
-  function submitData(page) {
-    let prefix;
-    switch(page) {
-      case "RRI": prefix = "rri_"; break;
-      case "A Cabin": prefix = "acabin_"; break;
-      case "B Cabin": prefix = "bcabin_"; break;
-      case "C Cabin": prefix = "ccabin_"; break;
-      default: prefix = "";
+    function openPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+      document.getElementById(pageId).style.display = 'block';
     }
 
-  // Date & Time of submission
-  let now = new Date();
-  let submitDate = now.toLocaleDateString("en-GB"); // DD/MM/YYYY
-  let submitTime = now.toLocaleTimeString("en-GB"); // HH:MM:SS
-
-  let data = {
-    sheetName: page,
-    date: document.getElementById(prefix + "date").value,
-    submit_date: submitDate,
-    submit_time: submitTime,
-    
-    eng_up_demand: document.getElementById(prefix + "eng_up_demand").value,
-    eng_up_dmand_period: document.getElementById(prefix + "eng_up_dmand_period").value,
-    eng_dn_demand: document.getElementById(prefix + "eng_dn_demand").value,
-    eng_dn_dmand_period: document.getElementById(prefix + "eng_dn_dmand_period").value,
-    eng_up_Permit: document.getElementById(prefix + "eng_up_Permit").value,
-    eng_up_Permit_period: document.getElementById(prefix + "eng_up_Permit_period").value,
-    eng_dn_Permit: document.getElementById(prefix + "eng_dn_Permit").value,
-    eng_dn_Permit_period: document.getElementById(prefix + "eng_dn_Permit_period").value,
-
-    ohe_up_demand: document.getElementById(prefix + "ohe_up_demand").value,
-    ohe_up_dmand_period: document.getElementById(prefix + "ohe_up_dmand_period").value,
-    ohe_dn_demand: document.getElementById(prefix + "ohe_dn_demand").value,
-    ohe_dn_dmand_period: document.getElementById(prefix + "ohe_dn_dmand_period").value,
-    ohe_up_Permit: document.getElementById(prefix + "ohe_up_Permit").value,
-    ohe_up_Permit_period: document.getElementById(prefix + "ohe_up_Permit_period").value,
-    ohe_dn_Permit: document.getElementById(prefix + "ohe_dn_Permit").value,
-    ohe_dn_Permit_period: document.getElementById(prefix + "ohe_dn_Permit_period").value,
-
-    rcmdcm_up_demand: document.getElementById(prefix + "rcmdcm_up_demand").value,
-    rcmdcm_up_dmand_period: document.getElementById(prefix + "rcmdcm_up_dmand_period").value,
-    rcmdcm_dn_demand: document.getElementById(prefix + "rcmdcm_dn_demand").value,
-    rcmdcm_dn_dmand_period: document.getElementById(prefix + "rcmdcm_dn_dmand_period").value,
-    rcmdcm_up_Permit: document.getElementById(prefix + "rcmdcm_up_Permit").value,
-    rcmdcm_up_Permit_period: document.getElementById(prefix + "rcmdcm_up_Permit_period").value,
-    rcmdcm_dn_Permit: document.getElementById(prefix + "rcmdcm_dn_Permit").value,
-    rcmdcm_dn_Permit_period: document.getElementById(prefix + "rcmdcm_dn_Permit_period").value,
-
-    remark: document.getElementById(prefix + "remark").value
-
-  };
-
-
-    // Send to Google Apps Script
-    fetch(WEB_APP_URL, {
-      method: "POST",
-      body: JSON.stringify(data),
-    })
-    .then(res => res.json())
-    .then(response => {
-      if (response.result === "success") {
-        alert("✅ Data submitted successfully!\nDate: " + submitDate + "\nTime: " + submitTime);
-        openPage('Home'); // 👈 Submit hone ke baad Home page par redirect
-      } else {
-        alert("⚠️ Error: " + response.error);
+    function submitData(page) {
+      let prefix;
+      switch (page) {
+        case "RRI": prefix = "rri_"; break;
+        case "A Cabin": prefix = "acabin_"; break;
+        case "B Cabin": prefix = "bcabin_"; break;
+        case "C Cabin": prefix = "ccabin_"; break;
+        default: prefix = "";
       }
-    })
-    .catch(err => {
-      alert("❌ Failed! " + err);
-    });
-  }
+
+      // Date & Time of submission
+      let now = new Date();
+      let submitDate = now.toLocaleDateString("en-GB"); // DD/MM/YYYY
+      let submitTime = now.toLocaleTimeString("en-GB"); // HH:MM:SS
+
+      let data = {
+        sheetName: page,
+        date: document.getElementById(prefix + "date").value,
+        submit_date: submitDate,
+        submit_time: submitTime,
+
+        eng_up_demand: document.getElementById(prefix + "eng_up_demand").value,
+        eng_up_dmand_period: document.getElementById(prefix + "eng_up_dmand_period").value,
+        eng_dn_demand: document.getElementById(prefix + "eng_dn_demand").value,
+        eng_dn_dmand_period: document.getElementById(prefix + "eng_dn_dmand_period").value,
+        eng_up_Permit: document.getElementById(prefix + "eng_up_Permit").value,
+        eng_up_Permit_period: document.getElementById(prefix + "eng_up_Permit_period").value,
+        eng_dn_Permit: document.getElementById(prefix + "eng_dn_Permit").value,
+        eng_dn_Permit_period: document.getElementById(prefix + "eng_dn_Permit_period").value,
+
+        ohe_up_demand: document.getElementById(prefix + "ohe_up_demand").value,
+        ohe_up_dmand_period: document.getElementById(prefix + "ohe_up_dmand_period").value,
+        ohe_dn_demand: document.getElementById(prefix + "ohe_dn_demand").value,
+        ohe_dn_dmand_period: document.getElementById(prefix + "ohe_dn_dmand_period").value,
+        ohe_up_Permit: document.getElementById(prefix + "ohe_up_Permit").value,
+        ohe_up_Permit_period: document.getElementById(prefix + "ohe_up_Permit_period").value,
+        ohe_dn_Permit: document.getElementById(prefix + "ohe_dn_Permit").value,
+        ohe_dn_Permit_period: document.getElementById(prefix + "ohe_dn_Permit_period").value,
+
+        rcmdcm_up_demand: document.getElementById(prefix + "rcmdcm_up_demand").value,
+        rcmdcm_up_dmand_period: document.getElementById(prefix + "rcmdcm_up_dmand_period").value,
+        rcmdcm_dn_demand: document.getElementById(prefix + "rcmdcm_dn_demand").value,
+        rcmdcm_dn_dmand_period: document.getElementById(prefix + "rcmdcm_dn_dmand_period").value,
+        rcmdcm_up_Permit: document.getElementById(prefix + "rcmdcm_up_Permit").value,
+        rcmdcm_up_Permit_period: document.getElementById(prefix + "rcmdcm_up_Permit_period").value,
+        rcmdcm_dn_Permit: document.getElementById(prefix + "rcmdcm_dn_Permit").value,
+        rcmdcm_dn_Permit_period: document.getElementById(prefix + "rcmdcm_dn_Permit_period").value,
+
+        remark: document.getElementById(prefix + "remark").value
+
+      };
+
+
+      // Send to Google Apps Script
+      fetch(WEB_APP_URL, {
+        method: "POST",
+        body: JSON.stringify(data),
+      })
+        .then(res => res.json())
+        .then(response => {
+          if (response.result === "success") {
+            alert("✅ Data submitted successfully!\nDate: " + submitDate + "\nTime: " + submitTime);
+
+            // 2. Saare inputs empty kar do
+            let form = document.querySelector(`#${pageId.toLowerCase()}_form`);
+            if (form) {
+              form.reset();   // ye saare input, textarea, select ko clear kar dega
+            }
+
+            openPage('Home'); // 👈 Submit hone ke baad Home page par redirect
+          } else {
+            alert("⚠️ Error: " + response.error);
+          }
+        })
+        .catch(err => {
+          alert("❌ Failed! " + err);
+        });
+    }
   </script>
 
 
 </body>
+
 </html>
