@@ -1,1290 +1,521 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AJNI BLOCK RECORDS</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <meta charset="UTF-8">
+  <title>AJNI BLOCK RECORDs</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', 'Nirmala UI', sans-serif;
-        }
-        
-        :root {
-            --primary: #0a4a7a;
-            --secondary: #e67e22;
-            --accent: #2ecc71;
-            --light: #f5f7fa;
-            --dark: #2c3e50;
-            --red: #e74c3c;
-            --green: #27ae60;
-        }
-        
-        body {
-            background: linear-gradient(135deg, #1a2a6c, #b21f1f);
-            color: #333;
-            min-height: 100vh;
-            padding-bottom: 80px;
-        }
-        
-        .container {
-            max-width: 100%;
-            padding: 15px;
-        }
-        
-        header {
-            background: var(--primary);
-            color: white;
-            padding: 15px;
-            border-radius: 0 0 15px 15px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        
-        h1 {
-            font-size: 1.6rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .app-title {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-bottom: 5px;
-        }
-        
-        .app-title i {
-            color: var(--accent);
-        }
-        
-        .main-menu {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .menu-btn {
-            background: linear-gradient(135deg, #ffffff, #f0f0f0);
-            border: none;
-            border-radius: 15px;
-            padding: 20px 10px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .menu-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 5px;
-            background: var(--secondary);
-        }
-        
-        .menu-btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-        }
-        
-        .menu-btn i {
-            font-size: 2.2rem;
-            color: var(--primary);
-            margin-bottom: 10px;
-            background: #e6f7ff;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-        
-        .menu-btn div {
-            font-weight: bold;
-            color: var(--dark);
-            font-size: 1.1rem;
-        }
-        
-        .page {
-            display: none;
-            background: white;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 15px;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
-            animation: fadeIn 0.5s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .page.active {
-            display: block;
-        }
-        
-        .back-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 8px 15px;
-            margin-bottom: 15px;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            font-weight: bold;
-        }
-        
-        .page-title {
-            text-align: center;
-            margin-bottom: 20px;
-            color: var(--primary);
-            position: relative;
-            padding-bottom: 10px;
-        }
-        
-        .page-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 25%;
-            width: 50%;
-            height: 3px;
-            background: var(--secondary);
-            border-radius: 2px;
-        }
-        
-        .section-title {
-            background: var(--primary);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 5px;
-            margin: 20px 0 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .section-title i {
-            color: var(--secondary);
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 10px;
-            border-left: 4px solid var(--secondary);
-        }
-        
-        .block-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .block-card {
-            background: white;
-            border: 1px solid #ddd;
-            border-radius: 10px;
-            padding: 15px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-        }
-        
-        .block-header {
-            background: #e6f7ff;
-            padding: 8px;
-            border-radius: 5px;
-            text-align: center;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: var(--primary);
-        }
-        
-        .input-row {
-            display: flex;
-            align-items: center;
-            margin-bottom: 12px;
-            gap: 10px;
-        }
-        
-        .input-row label {
-            min-width: 80px;
-            font-weight: bold;
-            color: var(--dark);
-        }
-        
-        .input-row input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: white;
-            font-size: 1rem;
-            text-align: center;
-            font-weight: bold;
-        }
-        
-        input[type="number"] {
-            min-width: 80px;
-        }
-        
-        .submit-btn {
-            background: linear-gradient(to right, var(--accent), var(--green));
-            color: white;
-            border: none;
-            border-radius: 50px;
-            padding: 14px 30px;
-            font-size: 1.1rem;
-            display: block;
-            margin: 25px auto;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 4px 10px rgba(46, 204, 113, 0.4);
-            font-weight: bold;
-            width: 90%;
-            max-width: 300px;
-        }
-        
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(46, 204, 113, 0.6);
-        }
-        
-        .submit-btn i {
-            margin-right: 8px;
-        }
-        
-        .ad-container {
-            height: 90px;
-            background: #e9ecef;
-            border-radius: 10px;
-            margin: 20px 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: #6c757d;
-            font-weight: bold;
-            overflow: hidden;
-            border: 1px dashed #adb5bd;
-        }
-        
-        .ad-label {
-            font-size: 0.8rem;
-            color: #6c757d;
-            text-align: center;
-            margin-top: 10px;
-        }
-        
-        .interstitial-ad {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-        }
-        
-        .close-ad {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--red);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        
-        .ad-content {
-            text-align: center;
-            padding: 20px;
-            max-width: 90%;
-        }
-        
-        .ad-logo {
-            font-size: 2.5rem;
-            color: var(--secondary);
-            margin-bottom: 15px;
-        }
-        
-        .ad-title {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: var(--accent);
-        }
-        
-        .ad-text {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            line-height: 1.6;
-            max-width: 500px;
-        }
-        
-        .ad-cta {
-            background: var(--accent);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            font-weight: bold;
-            transition: all 0.3s;
-        }
-        
-        .ad-cta:hover {
-            background: var(--green);
-            transform: scale(1.05);
-        }
-        
-        .date-picker {
-            display: flex;
-            justify-content: center;
-            margin: 15px 0;
-            position: relative;
-        }
-        
-        .date-picker input {
-            padding: 10px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: bold;
-            text-align: center;
-            width: 100%;
-            max-width: 300px;
-        }
-        
-        .today-btn {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 5px 10px;
-            font-size: 0.8rem;
-            cursor: pointer;
-        }
-        
-        @media (max-width: 768px) {
-            .block-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .main-menu {
-                grid-template-columns: 1fr;
-            }
-            
-            .input-row {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
-            .input-row label {
-                width: 100%;
-                margin-bottom: 5px;
-            }
-        }
-    </style>
+    .form-grid {
+      display: grid;
+      grid-template-columns: 200px 1fr; /* Label - Input */
+      gap: 10px 20px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .form-grid h3 {
+      grid-column: 1 / -1;  /* Full width */
+      margin-top: 20px;
+    }
+
+    .form-grid .full-width {
+      grid-column: 1 / -1;
+      text-align: center;
+      margin-top: 15px;
+    }
+
+    input, textarea, button {
+      padding: 6px;
+      font-size: 14px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    button.btn {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 8px 20px;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    button.btn:hover {
+      background: #0056b3;
+    }
+  </style>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: #f4f4f9;
+    }
+    h2 {
+      color: #333;
+    }
+    .page {
+      display: none;
+      margin-top: 20px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .btn {
+      padding: 10px 15px;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background: #4CAF50;
+      color: white;
+      font-size: 14px;
+    }
+    input {
+      margin: 8px 0;
+      padding: 8px;
+      width: 100%;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
 </head>
-<body>
-    <!-- इंटरस्टीशियल एड (ऐप ओपन करते ही दिखेगा) -->
-    <div class="interstitial-ad" id="interstitialAd">
-        <button class="close-ad" id="closeAd">
-            <i class="fas fa-times"></i>
-        </button>
-        <div class="ad-content">
-            <div class="ad-logo">
-                <i class="fas fa-ad"></i>
-            </div>
-            <h2 class="ad-title">रेलवे मेंटेनेंस ऐप</h2>
-            <p class="ad-text">अपनी रिपोर्टिंग प्रक्रिया को सुव्यवस्थित करें और समय बचाएं</p>
-            <button class="ad-cta" id="continueBtn">ऐप का उपयोग जारी रखें</button>
-        </div>
+<body onload="showPage('home')">
+  
+
+  
+  <!-- Home Page -->
+  <!-- <div id="home" class="page"> -->
+    <h2>🚦 AJNI BLOCK RECORDs</h2>
+      <button class="btn" onclick="openPage('RRI')">RRI</button>
+      <button class="btn" onclick="openPage('A Cabin')">A Cabin</button>
+      <button class="btn" onclick="openPage('B Cabin')">B Cabin</button>
+      <button class="btn" onclick="openPage('C Cabin')">C Cabin</button>
+  <!-- </div> -->
+
+
+<!-- RRI Page (Dark Theme) -->
+<div id="RRI" class="page dark">
+  <h2 class="title">AJNI RRI BLOCK</h2>
+  <form id="rri_form" class="form-card">
+
+    <div class="form-section">
+      <label>Date</label>
+      <input type="date" id="rri_date" max="">
     </div>
+
+    <!-- Engg. Block -->
+    <h3 class="section-title">Engg. Block</h3>
+    <div class="form-grid">
+      <div><label>Demand Up</label><input type="number" id="rri_eng_up_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="rri_eng_up_dmand_period"></div>
+      <div><label>Demand Dn</label><input type="number" id="rri_eng_dn_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="rri_eng_dn_dmand_period"></div>
+      <div><label>Permit Up</label><input type="number" id="rri_eng_up_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="rri_eng_up_Permit_period"></div>
+      <div><label>Permit Dn</label><input type="number" id="rri_eng_dn_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="rri_eng_dn_Permit_period"></div>
+    </div>
+
+    <!-- OHE Block -->
+    <h3 class="section-title">OHE Block</h3>
+    <div class="form-grid">
+      <div><label>Demand Up</label><input type="number" id="rri_ohe_up_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="rri_ohe_up_dmand_period"></div>
+      <div><label>Demand Dn</label><input type="number" id="rri_ohe_dn_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="rri_ohe_dn_dmand_period"></div>
+      <div><label>Permit Up</label><input type="number" id="rri_ohe_up_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="rri_ohe_up_Permit_period"></div>
+      <div><label>Permit Dn</label><input type="number" id="rri_ohe_dn_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="rri_ohe_dn_Permit_period"></div>
+    </div>
+
+    <!-- RCM/DCM -->
+    <h3 class="section-title">RCM / DCM</h3>
+    <div class="form-grid">
+      <div><label>Demand Up</label><input type="number" id="rri_rcmdcm_up_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="rri_rcmdcm_up_dmand_period"></div>
+      <div><label>Demand Dn</label><input type="number" id="rri_rcmdcm_dn_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="rri_rcmdcm_dn_dmand_period"></div>
+      <div><label>Permit Up</label><input type="number" id="rri_rcmdcm_up_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="rri_rcmdcm_up_Permit_period"></div>
+      <div><label>Permit Dn</label><input type="number" id="rri_rcmdcm_dn_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="rri_rcmdcm_dn_Permit_period"></div>
+    </div>
+
+    <!-- Remarks -->
+    <div class="form-section">
+      <label>Remarks</label>
+      <textarea id="rri_remark" rows="3"></textarea>
+    </div>
+
+    <button type="button" class="btn" onclick="submitData('RRI')">Submit</button>
+  </form>
+</div>
+
+<!-- DARK THEME CSS -->
+<style>
+  body {
+    background: #0f172a; /* dark navy */
+    color: #e2e8f0;
+    font-family: Arial, sans-serif;
+  }
+  .title {
+    text-align: center;
+    color: #38bdf8;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  .form-card {
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 12px;
+    max-width: 900px;
+    margin: auto;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.6);
+  }
+  .section-title {
+    margin-top: 20px;
+    color: #a78bfa;
+    font-size: 20px;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 5px;
+  }
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-top: 10px;
+  }
+  .form-section {
+    margin-top: 15px;
+  }
+  label {
+    font-weight: 600;
+    color: #cbd5e1;
+    display: block;
+    margin-bottom: 4px;
+  }
+  input, textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: #f1f5f9;
+    font-size: 14px;
+    transition: 0.2s;
+  }
+  input:focus, textarea:focus {
+    border-color: #38bdf8;
+    outline: none;
+    box-shadow: 0px 0px 8px rgba(56,189,248,0.4);
+  }
+  textarea {
+    resize: none;
+  }
+  .btn {
+    margin-top: 20px;
+    background: linear-gradient(90deg, #6366f1, #3b82f6);
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.3s;
+  }
+  .btn:hover {
+    background: linear-gradient(90deg, #4338ca, #1e40af);
+  }
+</style>
+
+
+<!-- A Cabin Page (Dark Theme) -->
+<div id="A Cabin" class="page dark">
+  <h2 class="title">AJNI A CABIN BLOCK</h2>
+  <form id="acabin_form" class="form-card">
+
+    <div class="form-section">
+      <label>Date</label>
+      <input type="date" id="acabin_date" max="">
+    </div>
+
+    <!-- Engg. Block -->
+    <h3 class="section-title">Engg. Block</h3>
+    <div class="form-grid">
+      <div><label>Demand Up</label><input type="number" id="acabin_eng_up_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="acabin_eng_up_dmand_period"></div>
+      <div><label>Demand Dn</label><input type="number" id="acabin_eng_dn_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="acabin_eng_dn_dmand_period"></div>
+      <div><label>Permit Up</label><input type="number" id="acabin_eng_up_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="acabin_eng_up_Permit_period"></div>
+      <div><label>Permit Dn</label><input type="number" id="acabin_eng_dn_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="acabin_eng_dn_Permit_period"></div>
+    </div>
+
+    <!-- OHE Block -->
+    <h3 class="section-title">OHE Block</h3>
+    <div class="form-grid">
+      <div><label>Demand Up</label><input type="number" id="acabin_ohe_up_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="acabin_ohe_up_dmand_period"></div>
+      <div><label>Demand Dn</label><input type="number" id="acabin_ohe_dn_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="acabin_ohe_dn_dmand_period"></div>
+      <div><label>Permit Up</label><input type="number" id="acabin_ohe_up_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="acabin_ohe_up_Permit_period"></div>
+      <div><label>Permit Dn</label><input type="number" id="acabin_ohe_dn_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="acabin_ohe_dn_Permit_period"></div>
+    </div>
+
+    <!-- RCM/DCM -->
+    <h3 class="section-title">RCM / DCM</h3>
+    <div class="form-grid">
+      <div><label>Demand Up</label><input type="number" id="acabin_rcmdcm_up_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="acabin_rcmdcm_up_dmand_period"></div>
+      <div><label>Demand Dn</label><input type="number" id="acabin_rcmdcm_dn_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="acabin_rcmdcm_dn_dmand_period"></div>
+      <div><label>Permit Up</label><input type="number" id="acabin_rcmdcm_up_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="acabin_rcmdcm_up_Permit_period"></div>
+      <div><label>Permit Dn</label><input type="number" id="acabin_rcmdcm_dn_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="acabin_rcmdcm_dn_Permit_period"></div>
+    </div>
+
+    <!-- Remarks -->
+    <div class="form-section">
+      <label>Remarks</label>
+      <textarea id="acabin_remark" rows="3"></textarea>
+    </div>
+
+    <button type="button" class="btn" onclick="submitData('A Cabin')">Submit</button>
+  </form>
+</div>
+
+
+
+<!-- B Cabin Page (Dark Theme) -->
+<div id="B Cabin" class="page dark">
+  <h2 class="title">AJNI B CABIN BLOCK</h2>
+  <form id="bcabin_form" class="form-card">
+
+    <div class="form-section">
+      <label>Date</label>
+      <input type="date" id="bcabin_date" max="">
+    </div>
+
+    <!-- Engg. Block -->
+    <h3 class="section-title">Engg. Block</h3>
+    <div class="form-grid">
+      <div><label>Demand Up</label><input type="number" id="bcabin_eng_up_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="bcabin_eng_up_dmand_period"></div>
+      <div><label>Demand Dn</label><input type="number" id="bcabin_eng_dn_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="bcabin_eng_dn_dmand_period"></div>
+      <div><label>Permit Up</label><input type="number" id="bcabin_eng_up_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="bcabin_eng_up_Permit_period"></div>
+      <div><label>Permit Dn</label><input type="number" id="bcabin_eng_dn_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="bcabin_eng_dn_Permit_period"></div>
+    </div>
+
+    <!-- OHE Block -->
+    <h3 class="section-title">OHE Block</h3>
+    <div class="form-grid">
+      <div><label>Demand Up</label><input type="number" id="bcabin_ohe_up_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="bcabin_ohe_up_dmand_period"></div>
+      <div><label>Demand Dn</label><input type="number" id="bcabin_ohe_dn_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="bcabin_ohe_dn_dmand_period"></div>
+      <div><label>Permit Up</label><input type="number" id="bcabin_ohe_up_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="bcabin_ohe_up_Permit_period"></div>
+      <div><label>Permit Dn</label><input type="number" id="bcabin_ohe_dn_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="bcabin_ohe_dn_Permit_period"></div>
+    </div>
+
+    <!-- RCM/DCM -->
+    <h3 class="section-title">RCM / DCM</h3>
+    <div class="form-grid">
+      <div><label>Demand Up</label><input type="number" id="bcabin_rcmdcm_up_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="bcabin_rcmdcm_up_dmand_period"></div>
+      <div><label>Demand Dn</label><input type="number" id="bcabin_rcmdcm_dn_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="bcabin_rcmdcm_dn_dmand_period"></div>
+      <div><label>Permit Up</label><input type="number" id="bcabin_rcmdcm_up_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="bcabin_rcmdcm_up_Permit_period"></div>
+      <div><label>Permit Dn</label><input type="number" id="bcabin_rcmdcm_dn_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="bcabin_rcmdcm_dn_Permit_period"></div>
+    </div>
+
+    <!-- Remarks -->
+    <div class="form-section">
+      <label>Remarks</label>
+      <textarea id="bcabin_remark" rows="3"></textarea>
+    </div>
+
+    <button type="button" class="btn" onclick="submitData('B Cabin')">Submit</button>
+  </form>
+</div>
+
+
+<!-- C Cabin Page (Dark Theme) -->
+<div id="C Cabin" class="page dark">
+  <h2 class="title">AJNI C CABIN BLOCK</h2>
+  <form id="ccabin_form" class="form-card">
+
+    <div class="form-section">
+      <label>Date</label>
+      <input type="date" id="ccabin_date" max="">
+    </div>
+
+    <!-- Engg. Block -->
+    <h3 class="section-title">Engg. Block</h3>
+    <div class="form-grid">
+      <div><label>Demand Up</label><input type="number" id="ccabin_eng_up_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="ccabin_eng_up_dmand_period"></div>
+      <div><label>Demand Dn</label><input type="number" id="ccabin_eng_dn_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="ccabin_eng_dn_dmand_period"></div>
+      <div><label>Permit Up</label><input type="number" id="ccabin_eng_up_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="ccabin_eng_up_Permit_period"></div>
+      <div><label>Permit Dn</label><input type="number" id="ccabin_eng_dn_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="ccabin_eng_dn_Permit_period"></div>
+    </div>
+
+    <!-- OHE Block -->
+    <h3 class="section-title">OHE Block</h3>
+    <div class="form-grid">
+      <div><label>Demand Up</label><input type="number" id="ccabin_ohe_up_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="ccabin_ohe_up_dmand_period"></div>
+      <div><label>Demand Dn</label><input type="number" id="ccabin_ohe_dn_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="ccabin_ohe_dn_dmand_period"></div>
+      <div><label>Permit Up</label><input type="number" id="ccabin_ohe_up_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="ccabin_ohe_up_Permit_period"></div>
+      <div><label>Permit Dn</label><input type="number" id="ccabin_ohe_dn_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="ccabin_ohe_dn_Permit_period"></div>
+    </div>
+
+    <!-- RCM/DCM -->
+    <h3 class="section-title">RCM / DCM</h3>
+    <div class="form-grid">
+      <div><label>Demand Up</label><input type="number" id="ccabin_rcmdcm_up_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="ccabin_rcmdcm_up_dmand_period"></div>
+      <div><label>Demand Dn</label><input type="number" id="ccabin_rcmdcm_dn_demand"></div>
+      <div><label>Period (min)</label><input type="number" id="ccabin_rcmdcm_dn_dmand_period"></div>
+      <div><label>Permit Up</label><input type="number" id="ccabin_rcmdcm_up_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="ccabin_rcmdcm_up_Permit_period"></div>
+      <div><label>Permit Dn</label><input type="number" id="ccabin_rcmdcm_dn_Permit"></div>
+      <div><label>Period (min)</label><input type="number" id="ccabin_rcmdcm_dn_Permit_period"></div>
+    </div>
+
+    <!-- Remarks -->
+    <div class="form-section">
+      <label>Remarks</label>
+      <textarea id="ccabin_remark" rows="3"></textarea>
+    </div>
+
+    <button type="button" class="btn" onclick="submitData('C Cabin')">Submit</button>
+  </form>
+</div>
+
+
+  <script>
+
+    window.onload = function() {
+      // आज की तारीख YYYY-MM-DD format में निकालना
+      let today = new Date().toISOString().split("T")[0];
+      
+      // RRI Page का date field
+      document.getElementById("rri_date").value = today;
+      document.getElementById("rri_date").setAttribute("max", today);
+
+      // 👉 बाकी pages (A Cabin, B Cabin, C Cabin) के लिए भी ऐसा ही कर सकते हैं
+      let pages = ["acabin_date", "bcabin_date", "ccabin_date"];
+      pages.forEach(id => {
+        let el = document.getElementById(id);
+        if (el) {
+          el.value = today;
+          el.setAttribute("max", today);
+        }
+      });
+    };
+
+  const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwOYa_N-50rtaAgqYuRuEjZcwjzoKXIbz-jQ88lFzlWYPZd8-CVKEt8YU6gXOY8E6Ev_w/exec"; 
+
+  function openPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
+    document.getElementById(pageId).style.display = 'block';
+  }
+
+  function submitData(page) {
+    let prefix;
+    switch(page) {
+      case "RRI": prefix = "rri_"; break;
+      case "A Cabin": prefix = "acabin_"; break;
+      case "B Cabin": prefix = "bcabin_"; break;
+      case "C Cabin": prefix = "ccabin_"; break;
+      default: prefix = "";
+    }
+
+  // Date & Time of submission
+  let now = new Date();
+  let submitDate = now.toLocaleDateString("en-GB"); // DD/MM/YYYY
+  let submitTime = now.toLocaleTimeString("en-GB"); // HH:MM:SS
+
+  let data = {
+    sheetName: page,
+    date: document.getElementById(prefix + "date").value,
+    submit_date: submitDate,
+    submit_time: submitTime,
     
-    <div class="container">
-        <header>
-            <div class="app-title">
-                <i class="fas fa-train"></i>
-                <h1>रेलवे मेंटेनेंस रिपोर्टिंग</h1>
-            </div>
-            <p>सटीक और समय पर रिपोर्टिंग का समाधान</p>
-        </header>
-        
-        <!-- मुख्य मेनू पेज -->
-        <div id="mainPage" class="page active">
-            <div class="main-menu">
-                <button class="menu-btn" onclick="showPage('rriPage')">
-                    <i class="fas fa-clipboard-check"></i>
-                    <div>RRI</div>
-                </button>
-                <button class="menu-btn" onclick="showPage('aCabinPage')">
-                    <i class="fas fa-train"></i>
-                    <div>A Cabin</div>
-                </button>
-                <button class="menu-btn" onclick="showPage('bCabinPage')">
-                    <i class="fas fa-subway"></i>
-                    <div>B Cabin</div>
-                </button>
-                <button class="menu-btn" onclick="showPage('cCabinPage')">
-                    <i class="fas fa-train-tram"></i>
-                    <div>C Cabin</div>
-                </button>
-            </div>
-            
-            <div class="ad-label">बैनर विज्ञापन</div>
-            <div class="ad-container">
-                <div style="text-align: center;">
-                    <i class="fas fa-ad" style="font-size: 2rem; color: #6c757d;"></i>
-                    <div style="font-weight: bold; margin-top: 5px;">AdMob बैनर</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- RRI Block पेज -->
-        <div id="rriPage" class="page">
-            <button class="back-btn" onclick="showPage('mainPage')">
-                <i class="fas fa-arrow-left"></i> मुख्य मेनू
-            </button>
-            <h2 class="page-title">AJNI RRI</h2>
-            
-            <div class="section-title">
-                <i class="fas fa-layer-group"></i>
-                Block Position
-            </div>
-            
-            <div class="date-picker">
-                <input type="date" id="rriDate" max="">
-                <button class="today-btn" onclick="setToday('rriDate')">आज</button>
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-cogs"></i>
-                Eng. Block
-            </div>
-            
-            <div class="block-container">
-                <div class="block-card">
-                    <div class="block-header">DEMAND BLOCK</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="engDemandUp" onchange="updatePeriod(this, 'engDemandUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="engDemandUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="engDemandDn" onchange="updatePeriod(this, 'engDemandDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="engDemandDnPeriod">
-                    </div>
-                </div>
-                
-                <div class="block-card">
-                    <div class="block-header">PERMITTED BLOCK</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="engPermittedUp" onchange="updatePeriod(this, 'engPermittedUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="engPermittedUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="engPermittedDn" onchange="updatePeriod(this, 'engPermittedDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="engPermittedDnPeriod">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-bolt"></i>
-                OHE/TRD
-            </div>
-            
-            <div class="block-container">
-                <div class="block-card">
-                    <div class="block-header">DEMAND</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="oheDemandUp" onchange="updatePeriod(this, 'oheDemandUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="oheDemandUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="oheDemandDn" onchange="updatePeriod(this, 'oheDemandDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="oheDemandDnPeriod">
-                    </div>
-                </div>
-                
-                <div class="block-card">
-                    <div class="block-header">PERMIT</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="ohePermitUp" onchange="updatePeriod(this, 'ohePermitUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="ohePermitUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="ohePermitDn" onchange="updatePeriod(this, 'ohePermitDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="ohePermitDnPeriod">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-tools"></i>
-                RCM/DCM
-            </div>
-            
-            <div class="block-container">
-                <div class="block-card">
-                    <div class="block-header">DEMAND</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="rcmDemandUp" onchange="updatePeriod(this, 'rcmDemandUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmDemandUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="rcmDemandDn" onchange="updatePeriod(this, 'rcmDemandDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmDemandDnPeriod">
-                    </div>
-                </div>
-                
-                <div class="block-card">
-                    <div class="block-header">PERMIT</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="rcmPermitUp" onchange="updatePeriod(this, 'rcmPermitUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmPermitUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="rcmPermitDn" onchange="updatePeriod(this, 'rcmPermitDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmPermitDnPeriod">
-                    </div>
-                </div>
-            </div>
-            
-            <button class="submit-btn" onclick="submitForm('RRI')">
-                <i class="fas fa-paper-plane"></i> सबमिट करें
-            </button>
-            
-            <div class="ad-label">बैनर विज्ञापन</div>
-            <div class="ad-container">
-                <div style="text-align: center;">
-                    <i class="fas fa-ad" style="font-size: 2rem; color: #6c757d;"></i>
-                    <div style="font-weight: bold; margin-top: 5px;">AdMob बैनर</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- A Cabin पेज -->
-        <div id="aCabinPage" class="page">
-            <button class="back-btn" onclick="showPage('mainPage')">
-                <i class="fas fa-arrow-left"></i> मुख्य मेनू
-            </button>
-            <h2 class="page-title">Cabin A Block</h2>
-            
-            <div class="section-title">
-                <i class="fas fa-layer-group"></i>
-                Block Position
-            </div>
-            
-            <div class="date-picker">
-                <input type="date" id="rriDate" max="">
-                <button class="today-btn" onclick="setToday('rriDate')">आज</button>
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-cogs"></i>
-                Eng. Block
-            </div>
-            
-            <div class="block-container">
-                <div class="block-card">
-                    <div class="block-header">DEMAND BLOCK</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="engDemandUp" onchange="updatePeriod(this, 'engDemandUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="engDemandUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="engDemandDn" onchange="updatePeriod(this, 'engDemandDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="engDemandDnPeriod">
-                    </div>
-                </div>
-                
-                <div class="block-card">
-                    <div class="block-header">PERMITTED BLOCK</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="engPermittedUp" onchange="updatePeriod(this, 'engPermittedUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="engPermittedUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="engPermittedDn" onchange="updatePeriod(this, 'engPermittedDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="engPermittedDnPeriod">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-bolt"></i>
-                OHE/TRD
-            </div>
-            
-            <div class="block-container">
-                <div class="block-card">
-                    <div class="block-header">DEMAND</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="oheDemandUp" onchange="updatePeriod(this, 'oheDemandUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="oheDemandUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="oheDemandDn" onchange="updatePeriod(this, 'oheDemandDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="oheDemandDnPeriod">
-                    </div>
-                </div>
-                
-                <div class="block-card">
-                    <div class="block-header">PERMIT</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="ohePermitUp" onchange="updatePeriod(this, 'ohePermitUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="ohePermitUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="ohePermitDn" onchange="updatePeriod(this, 'ohePermitDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="ohePermitDnPeriod">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-tools"></i>
-                RCM/DCM
-            </div>
-            
-            <div class="block-container">
-                <div class="block-card">
-                    <div class="block-header">DEMAND</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="rcmDemandUp" onchange="updatePeriod(this, 'rcmDemandUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmDemandUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="rcmDemandDn" onchange="updatePeriod(this, 'rcmDemandDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmDemandDnPeriod">
-                    </div>
-                </div>
-                
-                <div class="block-card">
-                    <div class="block-header">PERMIT</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="rcmPermitUp" onchange="updatePeriod(this, 'rcmPermitUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmPermitUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="rcmPermitDn" onchange="updatePeriod(this, 'rcmPermitDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmPermitDnPeriod">
-                    </div>
-                </div>
-            </div>
-            
-            <button class="submit-btn" onclick="submitForm('A Cabin')">
-                <i class="fas fa-paper-plane"></i> सबमिट करें
-            </button>
-            
-            <div class="ad-label">बैनर विज्ञापन</div>
-            <div class="ad-container">
-                <div style="text-align: center;">
-                    <i class="fas fa-ad" style="font-size: 2rem; color: #6c757d;"></i>
-                    <div style="font-weight: bold; margin-top: 5px;">AdMob बैनर</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- B Cabin पेज -->
-        <div id="bCabinPage" class="page">
-            <button class="back-btn" onclick="showPage('mainPage')">
-                <i class="fas fa-arrow-left"></i> मुख्य मेनू
-            </button>
-            <h2 class="page-title">Cabin B Block</h2>
-            
-            <div class="section-title">
-                <i class="fas fa-layer-group"></i>
-                Block Position
-            </div>
-            
-            <div class="date-picker">
-                <input type="date" id="rriDate" max="">
-                <button class="today-btn" onclick="setToday('rriDate')">आज</button>
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-cogs"></i>
-                Eng. Block
-            </div>
-            
-            <div class="block-container">
-                <div class="block-card">
-                    <div class="block-header">DEMAND BLOCK</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="engDemandUp" onchange="updatePeriod(this, 'engDemandUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="engDemandUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="engDemandDn" onchange="updatePeriod(this, 'engDemandDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="engDemandDnPeriod">
-                    </div>
-                </div>
-                
-                <div class="block-card">
-                    <div class="block-header">PERMITTED BLOCK</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="engPermittedUp" onchange="updatePeriod(this, 'engPermittedUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="engPermittedUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="engPermittedDn" onchange="updatePeriod(this, 'engPermittedDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="engPermittedDnPeriod">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-bolt"></i>
-                OHE/TRD
-            </div>
-            
-            <div class="block-container">
-                <div class="block-card">
-                    <div class="block-header">DEMAND</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="oheDemandUp" onchange="updatePeriod(this, 'oheDemandUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="oheDemandUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="oheDemandDn" onchange="updatePeriod(this, 'oheDemandDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="oheDemandDnPeriod">
-                    </div>
-                </div>
-                
-                <div class="block-card">
-                    <div class="block-header">PERMIT</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="ohePermitUp" onchange="updatePeriod(this, 'ohePermitUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="ohePermitUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="ohePermitDn" onchange="updatePeriod(this, 'ohePermitDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="ohePermitDnPeriod">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-tools"></i>
-                RCM/DCM
-            </div>
-            
-            <div class="block-container">
-                <div class="block-card">
-                    <div class="block-header">DEMAND</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="rcmDemandUp" onchange="updatePeriod(this, 'rcmDemandUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmDemandUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="rcmDemandDn" onchange="updatePeriod(this, 'rcmDemandDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmDemandDnPeriod">
-                    </div>
-                </div>
-                
-                <div class="block-card">
-                    <div class="block-header">PERMIT</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="rcmPermitUp" onchange="updatePeriod(this, 'rcmPermitUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmPermitUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="rcmPermitDn" onchange="updatePeriod(this, 'rcmPermitDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmPermitDnPeriod">
-                    </div>
-                </div>
-            </div>
-            
-            <button class="submit-btn" onclick="submitForm('B Cabin')">
-                <i class="fas fa-paper-plane"></i> सबमिट करें
-            </button>
-            
-            <div class="ad-label">बैनर विज्ञापन</div>
-            <div class="ad-container">
-                <div style="text-align: center;">
-                    <i class="fas fa-ad" style="font-size: 2rem; color: #6c757d;"></i>
-                    <div style="font-weight: bold; margin-top: 5px;">AdMob बैनर</div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- C Cabin पेज -->
-        <div id="cCabinPage" class="page">
-            <button class="back-btn" onclick="showPage('mainPage')">
-                <i class="fas fa-arrow-left"></i> मुख्य मेनू
-            </button>
-            <h2 class="page-title">Cabin C Block</h2>
-            
-            <div class="section-title">
-                <i class="fas fa-layer-group"></i>
-                Block Position
-            </div>
-            
-            <div class="date-picker">
-                <input type="date" id="rriDate" max="">
-                <button class="today-btn" onclick="setToday('rriDate')">आज</button>
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-cogs"></i>
-                Eng. Block
-            </div>
-            
-            <div class="block-container">
-                <div class="block-card">
-                    <div class="block-header">DEMAND BLOCK</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="engDemandUp" onchange="updatePeriod(this, 'engDemandUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="engDemandUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="engDemandDn" onchange="updatePeriod(this, 'engDemandDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="engDemandDnPeriod">
-                    </div>
-                </div>
-                
-                <div class="block-card">
-                    <div class="block-header">PERMITTED BLOCK</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="engPermittedUp" onchange="updatePeriod(this, 'engPermittedUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="engPermittedUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="engPermittedDn" onchange="updatePeriod(this, 'engPermittedDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="engPermittedDnPeriod">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-bolt"></i>
-                OHE/TRD
-            </div>
-            
-            <div class="block-container">
-                <div class="block-card">
-                    <div class="block-header">DEMAND</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="oheDemandUp" onchange="updatePeriod(this, 'oheDemandUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="oheDemandUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="oheDemandDn" onchange="updatePeriod(this, 'oheDemandDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="oheDemandDnPeriod">
-                    </div>
-                </div>
-                
-                <div class="block-card">
-                    <div class="block-header">PERMIT</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="ohePermitUp" onchange="updatePeriod(this, 'ohePermitUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="ohePermitUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="ohePermitDn" onchange="updatePeriod(this, 'ohePermitDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="ohePermitDnPeriod">
-                    </div>
-                </div>
-            </div>
-            
-            <div class="section-title">
-                <i class="fas fa-tools"></i>
-                RCM/DCM
-            </div>
-            
-            <div class="block-container">
-                <div class="block-card">
-                    <div class="block-header">DEMAND</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="rcmDemandUp" onchange="updatePeriod(this, 'rcmDemandUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmDemandUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="rcmDemandDn" onchange="updatePeriod(this, 'rcmDemandDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmDemandDnPeriod">
-                    </div>
-                </div>
-                
-                <div class="block-card">
-                    <div class="block-header">PERMIT</div>
-                    <div class="input-row">
-                        <label>UP:</label>
-                        <input type="number" min="0" value="0" id="rcmPermitUp" onchange="updatePeriod(this, 'rcmPermitUpPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>UP Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmPermitUpPeriod">
-                    </div>
-                    <div class="input-row">
-                        <label>DN:</label>
-                        <input type="number" min="0" value="0" id="rcmPermitDn" onchange="updatePeriod(this, 'rcmPermitDnPeriod')">
-                    </div>
-                    <div class="input-row">
-                        <label>DN Period (min):</label>
-                        <input type="number" min="0" value="0" id="rcmPermitDnPeriod">
-                    </div>
-                </div>
-            </div>
-            
-            <button class="submit-btn" onclick="submitForm('C Cabin')">
-                <i class="fas fa-paper-plane"></i> सबमिट करें
-            </button>
-            
-            <div class="ad-label">बैनर विज्ञापन</div>
-            <div class="ad-container">
-                <div style="text-align: center;">
-                    <i class="fas fa-ad" style="font-size: 2rem; color: #6c757d;"></i>
-                    <div style="font-weight: bold; margin-top: 5px;">AdMob बैनर</div>
-                </div>
-            </div>
-        </div>
-    </div>
+    eng_up_demand: document.getElementById(prefix + "eng_up_demand").value,
+    eng_up_dmand_period: document.getElementById(prefix + "eng_up_dmand_period").value,
+    eng_dn_demand: document.getElementById(prefix + "eng_dn_demand").value,
+    eng_dn_dmand_period: document.getElementById(prefix + "eng_dn_dmand_period").value,
+    eng_up_Permit: document.getElementById(prefix + "eng_up_Permit").value,
+    eng_up_Permit_period: document.getElementById(prefix + "eng_up_Permit_period").value,
+    eng_dn_Permit: document.getElementById(prefix + "eng_dn_Permit").value,
+    eng_dn_Permit_period: document.getElementById(prefix + "eng_dn_Permit_period").value,
 
-    <script>
-        // ऐप लोड होते ही इंटरस्टीशियल एड दिखाएं
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('interstitialAd').style.display = 'flex';
-            setCurrentDate();
-            setMaxDate();
-        });
-        
-        // एड क्लोज करने के लिए
-        document.getElementById('closeAd').addEventListener('click', function() {
-            document.getElementById('interstitialAd').style.display = 'none';
-        });
-        
-        document.getElementById('continueBtn').addEventListener('click', function() {
-            document.getElementById('interstitialAd').style.display = 'none';
-        });
-        
-        // पेज बदलने का फंक्शन
-        function showPage(pageId) {
-            // सभी पेज छुपाएं
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // चुना हुआ पेज दिखाएं
-            document.getElementById(pageId).classList.add('active');
-            
-            // डेट अपडेट करें
-            setCurrentDate();
-            setMaxDate();
-        }
-        
-        // वर्तमान डेट सेट करें
-        function setCurrentDate() {
-            const today = new Date();
-            const formattedDate = formatDate(today);
-            
-            // सभी डेट इनपुट्स सेट करें
-            const dateInputs = document.querySelectorAll('input[type="date"]');
-            dateInputs.forEach(input => {
-                if(!input.value) {
-                    input.value = today.toISOString().split('T')[0];
-                }
-            });
-        }
-        
-        // भविष्य की तारीखों को रोकने के लिए
-        function setMaxDate() {
-            const today = new Date().toISOString().split('T')[0];
-            document.querySelectorAll('input[type="date"]').forEach(input => {
-                input.setAttribute('max', today);
-            });
-        }
-        
-        // डेट फॉर्मेट करने का फंक्शन (dd/mm/yyyy)
-        function formatDate(date) {
-            const day = String(date.getDate()).padStart(2, '0');
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const year = date.getFullYear();
-            return `${day}/${month}/${year}`;
-        }
-        
-        // यदि ब्लॉक संख्या 0 है तो पीरियड को 0 पर सेट करें
-        // function updatePeriod(blockInput, periodId) {
-        //     const periodInput = document.getElementById(periodId);
-        //     if(blockInput.value === "0") {
-        //         periodInput.value = "0";
-        //     }
-        // }
-        if (blockInput.value === "0") {
-            periodInput.value = "0";
-            periodInput.disabled = true;
-        } else {
-                periodInput.disabled = false;
-            // If the period is currently 0, then clear it to allow user to enter
-            // if (periodInput.value === "0") {
-            //     periodInput.value = "";
-            }
-        // }
+    ohe_up_demand: document.getElementById(prefix + "ohe_up_demand").value,
+    ohe_up_dmand_period: document.getElementById(prefix + "ohe_up_dmand_period").value,
+    ohe_dn_demand: document.getElementById(prefix + "ohe_dn_demand").value,
+    ohe_dn_dmand_period: document.getElementById(prefix + "ohe_dn_dmand_period").value,
+    ohe_up_Permit: document.getElementById(prefix + "ohe_up_Permit").value,
+    ohe_up_Permit_period: document.getElementById(prefix + "ohe_up_Permit_period").value,
+    ohe_dn_Permit: document.getElementById(prefix + "ohe_dn_Permit").value,
+    ohe_dn_Permit_period: document.getElementById(prefix + "ohe_dn_Permit_period").value,
+
+    rcmdcm_up_demand: document.getElementById(prefix + "rcmdcm_up_demand").value,
+    rcmdcm_up_dmand_period: document.getElementById(prefix + "rcmdcm_up_dmand_period").value,
+    rcmdcm_dn_demand: document.getElementById(prefix + "rcmdcm_dn_demand").value,
+    rcmdcm_dn_dmand_period: document.getElementById(prefix + "rcmdcm_dn_dmand_period").value,
+    rcmdcm_up_Permit: document.getElementById(prefix + "rcmdcm_up_Permit").value,
+    rcmdcm_up_Permit_period: document.getElementById(prefix + "rcmdcm_up_Permit_period").value,
+    rcmdcm_dn_Permit: document.getElementById(prefix + "rcmdcm_dn_Permit").value,
+    rcmdcm_dn_Permit_period: document.getElementById(prefix + "rcmdcm_dn_Permit_period").value,
+
+    remark: document.getElementById(prefix + "remark").value
+
+  };
 
 
-        
-        // आज की तारीख सेट करें
-        function setToday(dateId) {
-            const today = new Date().toISOString().split('T')[0];
-            document.getElementById(dateId).value = today;
-        }
-        
-        // फॉर्म सबमिशन फंक्शन
-        function submitForm(sheetName) {
-            // डेटा एकत्रित करें
-            const date = document.querySelector('input[type="date"]').value;
-            const formattedDate = formatDate(new Date(date));
-            
-            // भविष्य की तारीख की जाँच करें
-            const today = new Date();
-            const selectedDate = new Date(date);
-            
-            if(selectedDate > today) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'अमान्य तारीख',
-                    text: 'कृपया आज या पिछली तारीख चुनें',
-                    confirmButtonText: 'ठीक है'
-                });
-                return;
-            }
-            
-            // सफलता संदेश दिखाएं
-            Swal.fire({
-                icon: 'success',
-                title: 'रिपोर्ट सबमिट हो गई!',
-                html: `<b>${formattedDate}</b> की रिपोर्ट <b>${sheetName}</b> शीट में सेव की गई है।`,
-                confirmButtonText: 'ठीक है'
-            });
-            
-            // मुख्य मेनू पर वापस जाएं
-            setTimeout(() => {
-                showPage('mainPage');
-            }, 3000);
-        }
-    </script>
+    // Send to Google Apps Script
+    fetch(WEB_APP_URL, {
+      method: "POST",
+      body: JSON.stringify(data),
+    })
+    .then(res => res.json())
+    .then(response => {
+      if (response.result === "success") {
+        alert("✅ Data submitted successfully!\nDate: " + submitDate + "\nTime: " + submitTime);
+        openPage('Home'); // 👈 Submit hone ke baad Home page par redirect
+      } else {
+        alert("⚠️ Error: " + response.error);
+      }
+    })
+    .catch(err => {
+      alert("❌ Failed! " + err);
+    });
+  }
+  </script>
+
 
 </body>
 </html>
